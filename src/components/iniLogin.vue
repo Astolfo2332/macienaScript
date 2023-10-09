@@ -70,6 +70,7 @@
     
 <script>
 export default{
+
     created:function(){
         this.queryLogin();
     },
