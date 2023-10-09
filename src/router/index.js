@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from '../components/iniLogin.vue'
-import singUp from '../components/SingUp.vue'
+import cEntidad from '../components/crearEntidad.vue'
+import EntityList from "../components/listaEntidades.vue"
+import eEntity from "../components/editarEntidad.vue"
 const routes = [
   {
     path: '/',
@@ -8,9 +10,19 @@ const routes = [
     component: Login
   },
   {
-    path: '/SingUp',
-    name: 'singup',
-    component: singUp
+    path: '/cEntity',
+    name: 'cEntidad',
+    component: cEntidad
+  },
+  {
+    path: '/eList',
+    name: 'EntityList',
+    component: EntityList
+  },
+  {
+    path: '/eEntity:id',
+    name: 'eEntity',
+    component: eEntity
   },
   {
     path: '/about',

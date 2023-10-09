@@ -15,7 +15,7 @@
     
                   <!-- Email input -->
                   <div class="form-outline mb-4">
-                    <input type="email" id="form3Example3" class="form-control" v-model="userName"/>
+                    <input type="text" id="form3Example3" class="form-control" v-model="userName"/>
                     <label class="form-label" for="form3Example3">Usuario</label>
                   </div>
     
@@ -45,7 +45,7 @@
           </div>
     
           <div class="col-lg-6 mb-5 mb-lg-0">
-            <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+            <img src="../assets/coco.png" class="w-100 rounded-4 shadow-4"
               alt="" />
           </div>
         </div>
@@ -70,23 +70,28 @@
     
 <script>
 export default{
-
-    created:function(){
-        this.queryLogin();
-    },
     methods:{queryLogin(){
         let operation="queryLogin"
         let tna=4
         let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
         let nameUser=this.userName
         let passwordUser=this.passwordUser
-        fetch("https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+        const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
         "&tna="+tna+
         "&nameUser="+nameUser+
         "&passwordUser="+passwordUser+
-        "&key="+key)
+        "&key="+key
+
+        fetch(url)
         .then(response=>response.json())
-        .then(response=>{console.log(response)})
+        .then(response=>{console.log(response);
+        if (response.valid==false){
+          alert(response.error)
+        }
+        
+        
+        })
+        .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
         }
     }
 }
