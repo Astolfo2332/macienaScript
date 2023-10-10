@@ -21,7 +21,7 @@
 
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="phone" />
+                <input type="tel" id="form3Example4" class="form-control" v-model="phone" />
                 <label class="form-label" for="form3Example4">Teléfono</label>
               </div>
 
@@ -35,7 +35,7 @@
               <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveEntity">
                 Crear
               </button>
-              
+
               <button type="reset" class="btn btn-danger btn-block mb-4">
                 Limpiar
               </button>

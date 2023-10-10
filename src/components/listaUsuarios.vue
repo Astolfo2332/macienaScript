@@ -12,19 +12,25 @@
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Teléfono</th>
-                            <th>Dirección</th>
+                            <th>Documento</th>
+                            <th>Posición</th>
+                            <th>Tipo de usuario</th>
+                            <th>id Entidad</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="entidad in entidades" :key="entidad.id">
-                            <td scope="row">{{entidad.id}}</td>
-                            <td>{{entidad.name}}</td>
-                            <td>{{ entidad.phone }}</td>
-                            <td>{{ entidad.adress}}</td>
+                        <tr v-for="usuario in usuarios" :key="usuario.id">
+                            <td scope="row">{{usuario.id}}</td>
+                            <td>{{usuario.name}}</td>
+                            <td>{{usuario.phone}}</td>
+                            <td>{{usuario.document}}</td>
+                            <td>{{usuario.position}}</td>
+                            <td>{{usuario.userType}}</td>
+                            <td>{{usuario.entityID}}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
-                                    <router-link :to="{name:'eEntity', params:{id:entidad.id}}" class="btn btn-info">Editar</router-link> 
-                                    <button type="button" v-on:click="DeleteEntity(entidad.id)" class="btn btn-danger">Borrar</button>
+                                     <router-link :to="{name:'editUsers', params:{id:usuario.id}}" class="btn btn-info">Editar</router-link> 
+                                    <button type="button" v-on:click="DeleteUser(usuario.id)" class="btn btn-danger">Borrar</button>
                                 </div>
                             </td>
                         </tr>
@@ -45,15 +51,15 @@
 export default {
     data(){
         return {
-            entidades:[]
+            usuarios:[]
         }
     },
     created:function(){
-        this.queryEntityByTenancy()
+        this.queryUserByTenancy()
     },
     methods:{
-        queryEntityByTenancy(){
-            let operation="queryEntityByTenancy"
+        queryUserByTenancy(){
+            let operation="queryUserByTenancy"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
@@ -63,22 +69,22 @@ export default {
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
-                this.entidades=[]
+                this.usuarios=[]
                 if(datosRespuesta.valid==true){
-                    this.entidades=datosRespuesta.arrayEntity;
+                    this.usuarios=datosRespuesta.arrayUser;
                 }
 
             })
             .catch(console.log)
         },
-        DeleteEntity(id){
-            let operation="DeleteEntity"
+        DeleteUser(id){
+            let operation="DeleteUser"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
-            "&idEntity="+id
+            "&userId="+id
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{

@@ -139,7 +139,7 @@ methods:{
       let operation="SaveUser"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=this.nameUser+" "+this.lastnameUser
+      let name=this.nameUser+","+this.lastnameUser
       let phone=this.phoneUser
       let password=this.passwordUser
       let document=this.documentUser
