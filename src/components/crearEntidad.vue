@@ -15,18 +15,18 @@
               
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example3" class="form-control" v-model="name" />
+                <input type="text" id="form3Example3" class="form-control" v-model="name" required/>
                 <label class="form-label" for="form3Example3">Nombre</label>
               </div>
 
 
               <div class="form-outline mb-4">
-                <input type="tel" id="form3Example4" class="form-control" v-model="phone" />
+                <input type="tel" id="form3Example4" class="form-control" v-model="phone" required/>
                 <label class="form-label" for="form3Example4">Teléfono</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="adress"/>
+                <input type="text" id="form3Example4" class="form-control" v-model="adress" required/>
                 <label class="form-label" for="form3Example4">Dirección</label>
               </div>
 

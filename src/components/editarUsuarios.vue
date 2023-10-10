@@ -15,51 +15,51 @@
                 <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
-                        <input type="text" id="form3Example1" class="form-control" v-model="usuario.firstName"/>
+                        <input type="text" id="form3Example1" class="form-control" v-model="usuario.firstName" required/>
                         <label class="form-label" for="form3Example1">Nombres</label>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
-                        <input type="text" id="form3Example2" class="form-control" v-model="usuario.lastName"/>
+                        <input type="text" id="form3Example2" class="form-control" v-model="usuario.lastName" required/>
                         <label class="form-label" for="form3Example2">Apellidos</label>
                       </div>
                     </div>
                   </div>
     
                   <div class="form-outline mb-4">
-                    <input type="password" id="form3Example4" class="form-control" v-model="passwordUser"/>
+                    <input type="password" id="form3Example4" class="form-control" v-model="passwordUser" required/>
                     <label class="form-label" for="form3Example4">Contraseña</label>
                   </div>
                   <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2"/>
+                <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2" required/>
                     <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
                 </div>
     
                   <div class="form-outline mb-4">
-                    <input type="tel" id="form3Example4" class="form-control" v-model="usuario.phone" />
+                    <input type="tel" id="form3Example4" class="form-control" v-model="usuario.phone" required/>
                     <label class="form-label" for="form3Example4">Teléfono</label>
                   </div>
     
                   
     
                   <div class="form-outline mb-4">
-                    <input type="tel" id="form3Example4" class="form-control" v-model="usuario.document"/>
+                    <input type="tel" id="form3Example4" class="form-control" v-model="usuario.document" required/>
                     <label class="form-label" for="form3Example4">Documento de Identidad</label>
                   </div>
     
                   <div class="form-outline mb-4">
-                    <input type="text" id="form3Example4" class="form-control" v-model="usuario.position"/>
+                    <input type="text" id="form3Example4" class="form-control" v-model="usuario.position" required/>
                     <label class="form-label" for="form3Example4">Posición de usuario</label>
                   </div>
     
                   <div class="form-outline mb-4">
-                    <input type="number" id="form3Example4" class="form-control" v-model="usuario.userType"/>
+                    <input type="number" id="form3Example4" class="form-control" v-model="usuario.userType" required/>
                     <label class="form-label" for="form3Example4">Tipo de usuario</label>
                   </div>
     
                   <div class="form-outline mb-4">
-                    <input type="number" id="form3Example4" class="form-control" v-model="usuario.entityID"/>
+                    <input type="number" id="form3Example4" class="form-control" v-model="usuario.entityID" required/>
                     <label class="form-label" for="form3Example4">ID de entidad</label>
                   </div>
     
