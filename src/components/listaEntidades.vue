@@ -1,6 +1,16 @@
 <template>
     <div class="container">
-        
+        <div class="p-5 bg-image" style="
+        background-image: url('https://tinyurl.com/5du55a95');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
         <div class="card">
             <div class="card-header">
                 Titulo
@@ -36,7 +46,8 @@
                 Copyright: maicenaScript 2023
             </div>
         </div>
-
+    </div>
+        
 
     </div>
 </template>
