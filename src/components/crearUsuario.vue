@@ -60,8 +60,8 @@
               </div>
 
               <div class="form-outline mb-4">
-                <select id="form3Example4" v-model="userEntityId" >
-                  <option v-for="entidad in entidades" :key="entidad.id" value=1> {{ entidad.name }} </option>
+                <select class='form-select'  id="form3Example4" v-model="userEntityId" >
+                  <option v-for="entidad in entidades" :key="entidad.id" :value="entidad.id"> {{ entidad.name }} </option>
                 </select>
                 <label class="form-label" for="form3Example4">ID de entidad</label>
               </div>
@@ -139,13 +139,14 @@ methods:{
       let operation="SaveUser"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=this.nameUser+","+this.lastnameUser
+      let name=this.nameUser+" "+this.lastnameUser
       let phone=this.phoneUser
       let password=this.passwordUser
       let document=this.documentUser
       let position=this.positionUser
       let userType=this.userType
       let userEntityId=this.userEntityId
+      console.log(userEntityId)
       const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
       "&tna="+tna+
       "&key="+key+
