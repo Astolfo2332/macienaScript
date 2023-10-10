@@ -12,26 +12,35 @@
           <div class="card-body p-5 shadow-5 text-center">
             <h2 class="fw-bold mb-5">Crear usuario</h2>
             <form>
-              
-
-              <div class="form-outline mb-4">
-                <input type="text" id="form3Example3" class="form-control" v-model="nameUser" />
-                <label class="form-label" for="form3Example3">Nombre</label>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="form3Example1" class="form-control" v-model="nameUser"/>
+                    <label class="form-label" for="form3Example1">Nombres</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="form3Example2" class="form-control" v-model="lastnameUser"/>
+                    <label class="form-label" for="form3Example2">Apellidos</label>
+                  </div>
+                </div>
               </div>
 
-
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="phoneUser" />
-                <label class="form-label" for="form3Example4">Teléfono</label>
-              </div>
-
-              <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="passwordUser"/>
+                <input type="password" id="form3Example4" class="form-control" v-model="passwordUser"/>
                 <label class="form-label" for="form3Example4">Contraseña</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="documentUser"/>
+                <input type="tel" id="form3Example4" class="form-control" v-model="phoneUser" />
+                <label class="form-label" for="form3Example4">Teléfono</label>
+              </div>
+
+              
+
+              <div class="form-outline mb-4">
+                <input type="tel" id="form3Example4" class="form-control" v-model="documentUser"/>
                 <label class="form-label" for="form3Example4">Documento de Identidad</label>
               </div>
 
@@ -51,8 +60,11 @@
               </div>
 
 
-              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveEntity">
-                Sign up
+              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveUser">
+                Crear
+              </button>
+              <button type="reset" class="btn btn-danger btn-block mb-4">
+                Limpiar
               </button>
 
         
@@ -90,7 +102,7 @@ methods:{SaveUser(){
     let operation="SaveUser"
     let tna=4
     let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=this.nameUser
+    let name=this.nameUser+" "+this.lastnameUser
     let phone=this.phoneUser
     let password=this.passwordUser
     let document=this.documentUser
@@ -100,13 +112,13 @@ methods:{SaveUser(){
     const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
     "&tna="+tna+
     "&key="+key+
-    "&nameUser="+nameUser+
-    "&phoneUser="+phoneUser+
-    "&passwordUser="+passwordUser+
-    "&documentUser="+documentUser+
-    "&positionUser="+positionUser+
+    "&nameUser="+name+
+    "&phoneUser="+phone+
+    "&passwordUser="+password+
+    "&documentUser="+document+
+    "&positionUser="+position+
     "&userType="+userType+
-    "&userEntityId="+userEntityId+
+    "&userEntityId="+userEntityId
 
     fetch(url)
     .then(response=>response.json())

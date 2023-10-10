@@ -33,9 +33,12 @@
             
 
               <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveEntity">
-                Sign up
+                Crear
               </button>
-
+              
+              <button type="reset" class="btn btn-danger btn-block mb-4">
+                Limpiar
+              </button>
         
             </form>
           </div>

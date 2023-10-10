@@ -3,6 +3,7 @@ import Login from '../components/iniLogin.vue'
 import cEntidad from '../components/crearEntidad.vue'
 import EntityList from "../components/listaEntidades.vue"
 import eEntity from "../components/editarEntidad.vue"
+import cUsers from "../components/crearUsuario.vue"
 const routes = [
   {
     path: '/',
@@ -23,6 +24,11 @@ const routes = [
     path: '/eEntity:id',
     name: 'eEntity',
     component: eEntity
+  },
+  {
+    path: '/cUser',
+    name: 'cUser',
+    component: cUsers
   },
   {
     path: '/about',
