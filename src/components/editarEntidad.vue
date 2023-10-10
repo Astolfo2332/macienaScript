@@ -108,17 +108,19 @@ methods:{
     "&key="+key+
     "&nameEntity="+name+
     "&phoneEntity="+phone+
-    "&adressEntity="+adress
-
+    "&adressEntity="+adress+
+    "&idEntity="+this.$route.params.id
+    console.log(url)
     fetch(url)
     .then(response=>response.json())
     .then(response=>{console.log(response);
     if (response.valid==true){
       alert("Entidad modificada exitosamente con el id: "+response.entityVO.id)
+      window.location="/#/eList"
     }
     })
     .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
-
+    
   }
 }
 }

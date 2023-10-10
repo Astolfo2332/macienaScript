@@ -31,6 +31,10 @@
                     <input type="password" id="form3Example4" class="form-control" v-model="passwordUser"/>
                     <label class="form-label" for="form3Example4">Contraseña</label>
                   </div>
+                  <div class="form-outline mb-4">
+                <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2"/>
+                    <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
+                </div>
     
                   <div class="form-outline mb-4">
                     <input type="tel" id="form3Example4" class="form-control" v-model="usuario.phone" />
@@ -61,11 +65,9 @@
     
     
                   <button type="submit" class="btn btn-primary btn-block mb-4" @click="UpdateUser">
-                    Crear
+                    Modificar
                   </button>
-                  <button type="reset" class="btn btn-danger btn-block mb-4">
-                    Limpiar
-                  </button>
+                  <router-link :to="{name:'lUsers'}" class="btn btn-warning btn-block mb-4">Cancelar</router-link>
     
             
                 </form>
@@ -136,38 +138,43 @@ export default{
             .catch(console.log)
         },
         UpdateUser(){
-    let operation="UpdateUser"
-    let tna=4
-    let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=this.usuario.firstName+","+this.usuario.lastName
-    let phone=this.usuario.phoneUser
-    let password=this.passwordUser
-    let document=this.usuario.documentUser
-    let position=this.usuario.positionUser
-    let userType=this.usuario.userType
-    let userEntityId=this.usuario.userEntityId
-    const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
-    "&tna="+tna+
-    "&key="+key+
-    "&nameUser="+name+
-    "&phoneUser="+phone+
-    "&passwordUser="+password+
-    "&documentUser="+document+
-    "&positionUser="+position+
-    "&userType="+userType+
-    "&userEntityId="+userEntityId
-
-    fetch(url)
-    .then(response=>response.json())
-    .then(response=>{console.log(response);
-    if (response.valid==true){
-      alert("Usuario modificado exitosamente con el id: "+response.entityVO.id)
+            if (this.passwordUser == this.passwordUser2){
+            let operation="UpdateUser"
+            let tna=4
+            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            let name=this.usuario.firstName+","+this.usuario.lastName
+            let phone=this.usuario.phone
+            let password=this.passwordUser
+            let document=this.usuario.document
+            let position=this.usuario.position
+            let userType=this.usuario.userType
+            let userEntityId=this.usuario.entityID
+            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+            "&tna="+tna+
+            "&key="+key+
+            "&nameUser="+name+
+            "&phoneUser="+phone+
+            "&userId="+this.$route.params.id+
+            "&passwordUser="+password+
+            "&documentUser="+document+
+            "&positionUser="+position+
+            "&userType="+userType+
+            "&userEntityId="+userEntityId
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{console.log(response);
+            if (response.valid==true){
+            alert("Usuario modificado exitosamente con el id: "+response.userVO.id)
+            window.location="/#/lUsers"
+            }
+            })
+            .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
+            }
+            else {
+                alert("La contraseña debe ser confirmada con la misma contraseña.")
+            }
+        }
     }
-    })
-    .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
-
-  }
-}
 }
 
 
