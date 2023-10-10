@@ -33,6 +33,11 @@
               </div>
 
               <div class="form-outline mb-4">
+                <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2"/>
+                <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
+              </div>
+
+              <div class="form-outline mb-4">
                 <input type="tel" id="form3Example4" class="form-control" v-model="phoneUser" />
                 <label class="form-label" for="form3Example4">Teléfono</label>
               </div>
@@ -99,36 +104,44 @@
 <script>
 export default{
 methods:{SaveUser(){
-    let operation="SaveUser"
-    let tna=4
-    let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=this.nameUser+" "+this.lastnameUser
-    let phone=this.phoneUser
-    let password=this.passwordUser
-    let document=this.documentUser
-    let position=this.positionUser
-    let userType=this.userType
-    let userEntityId=this.userEntityId
-    const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
-    "&tna="+tna+
-    "&key="+key+
-    "&nameUser="+name+
-    "&phoneUser="+phone+
-    "&passwordUser="+password+
-    "&documentUser="+document+
-    "&positionUser="+position+
-    "&userType="+userType+
-    "&userEntityId="+userEntityId
 
-    fetch(url)
-    .then(response=>response.json())
-    .then(response=>{console.log(response);
-    if (response.valid==true){
-      alert("Usuario creado exitosamente con el id: "+response.userVO.id)
+    if (this.passwordUser == this.passwordUser2){
+      let operation="SaveUser"
+      let tna=4
+      let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+      let name=this.nameUser+" "+this.lastnameUser
+      let phone=this.phoneUser
+      let password=this.passwordUser
+      let document=this.documentUser
+      let position=this.positionUser
+      let userType=this.userType
+      let userEntityId=this.userEntityId
+      const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+      "&tna="+tna+
+      "&key="+key+
+      "&nameUser="+name+
+      "&phoneUser="+phone+
+      "&passwordUser="+password+
+      "&documentUser="+document+
+      "&positionUser="+position+
+      "&userType="+userType+
+      "&userEntityId="+userEntityId
+
+      fetch(url)
+      .then(response=>response.json())
+      .then(response=>{console.log(response);
+      if (response.valid==true){
+        alert("Usuario creado exitosamente con el id: "+response.userVO.id)
+      }
+      })
+      .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
     }
-    })
-    .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
+    else {
+      alert("La contraseña debe ser confirmada con la misma contraseña.")
     }
+  }
+
+    
 }
 }
 
