@@ -5,6 +5,7 @@
     <router-link to="/eList">EntityList</router-link> | 
     <router-link to="/cUser">cUser</router-link> | 
     <router-link to="/lUsers">lUser</router-link> | 
+    <router-link to="/usersxentity">UserXEntity</router-link> | 
   </nav>
   <router-view/>
 </template>
