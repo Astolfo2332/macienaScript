@@ -83,7 +83,7 @@ export default {
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 alert(datosRespuesta.message)
-                window.location.href="EntityList"
+                window.location.href="/"
             })
             .catch(console.log)
         }
