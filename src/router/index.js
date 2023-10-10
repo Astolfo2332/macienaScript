@@ -4,6 +4,9 @@ import cEntidad from '../components/crearEntidad.vue'
 import EntityList from "../components/listaEntidades.vue"
 import eEntity from "../components/editarEntidad.vue"
 import cUsers from "../components/crearUsuario.vue"
+import usersList from "../components/listaUsuarios.vue"
+import eUsers from "../components/editarUsuarios.vue"
+
 const routes = [
   {
     path: '/',
@@ -29,6 +32,16 @@ const routes = [
     path: '/cUser',
     name: 'cUser',
     component: cUsers
+  },
+  {
+    path: '/lUsers',
+    name: 'lUsers',
+    component: usersList
+  },
+  {
+    path: '/eUsers:id',
+    name: 'editUsers',
+    component: eUsers
   },
   {
     path: '/about',
