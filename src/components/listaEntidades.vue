@@ -13,9 +13,10 @@
         ">
         <div class="card">
             <div class="card-header">
-                Titulo
+                Lista de entidades
             </div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -41,6 +42,7 @@
                         
                     </tbody>
                 </table>
+            </div>
             </div>
             <div class="card-footer text-muted">
                 Copyright: maicenaScript 2023

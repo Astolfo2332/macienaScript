@@ -16,6 +16,7 @@
                 Lista de usuarios
             </div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -47,6 +48,7 @@
                         
                     </tbody>
                 </table>
+            </div>
             </div>
             <div class="card-footer text-muted">
                 Copyright: maicenaScript 2023

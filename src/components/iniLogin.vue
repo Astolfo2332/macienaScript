@@ -6,11 +6,10 @@
     <div class="container py-4">
       <div class="row g-0 align-items-center">
         <div class="col-lg-6 mb-5 mb-lg-0">
-          <div class="card" style="
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
-          ">
+          <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
             <div class="card-body p-5 text-center">
               <h2 class="fw-bold mb-5">Ingrese sus datos</h2>
               <form>
@@ -55,7 +54,15 @@
 </template>
 
 <style scoped>
+.cascading-right {
+      margin-right: -50px;
+    }
 
+    @media (max-width: 991.98px) {
+      .cascading-right {
+        margin-right: 0;
+      }
+    }
   .form-control {
     border: 2px solid #ccc;
     border-radius: 10px;
