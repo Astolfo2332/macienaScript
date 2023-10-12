@@ -58,16 +58,29 @@
 
 <style scoped>
 .cascading-right {
-      margin-right: -50px;
-    }
+  margin-right: -5px;
+}
 
-    @media (max-width: 991.98px) {
-      .cascading-right {
-        margin-right: 0;
-      }
-    }
+@media (max-width: 991.98px) {
+  .cascading-right {
+    margin-right: 0;
+  }
+}
+.card {
+  border-radius: 15px; 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+}
+
+.form-outline input {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-primary, .btn-danger {
+  border-radius: 3px; 
+}
+
 </style>
-
 <script>
 export default{
 methods:{SaveEntity(){
