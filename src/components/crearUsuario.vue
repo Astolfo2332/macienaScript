@@ -147,13 +147,13 @@ methods:{
       let operation="SaveUser"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=this.nameUser+","+this.lastnameUser
-      let phone=this.phoneUser
-      let password=this.passwordUser
-      let document=this.documentUser
-      let position=this.positionUser
-      let userType=this.userType
-      let userEntityId=this.userEntityId
+      let name=encodeURI( this.nameUser+","+this.lastnameUser)
+      let phone=encodeURI( this.phoneUser)
+      let password=encodeURI( this.passwordUser)
+      let document=encodeURI( this.documentUser)
+      let position=encodeURI( this.positionUser)
+      let userType=encodeURI( this.userType)
+      let userEntityId=encodeURI( this.userEntityId)
       console.log(userEntityId)
       const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
       "&tna="+tna+
@@ -170,7 +170,7 @@ methods:{
       .then(response=>response.json())
       .then(response=>{console.log(response);
       if (response.valid==true){
-        alert("Usuario creado exitosamente con el id: "+response.userVO.id)
+        alert("Usuario creado exitosamente con el id: "+response.userVO.id+" y usuario"+response.userVO.nickname)
       }
       })
       .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

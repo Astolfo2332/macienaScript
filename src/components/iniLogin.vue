@@ -88,8 +88,8 @@ export default{
         let operation="queryLogin"
         let tna=4
         let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-        let nameUser=this.userName
-        let passwordUser=this.passwordUser
+        let nameUser= encodeURI(this.userName)
+        let passwordUser=encodeURI(this.passwordUser)
         const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
         "&tna="+tna+
         "&nameUser="+nameUser+
