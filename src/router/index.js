@@ -11,6 +11,8 @@ import servicesList from "../components/listaServicios.vue"
 import servicesxEntity from "../components/listaServiciosxEntidad.vue"
 import cStandard from "../components/crearEstandar.vue"
 import lStandard from "../components/listarEstandares.vue"
+import eStandard from "../components/editarEstandares.vue"
+import StandardxService from "../components/listarEstandaresXServicio.vue"
 
 const routes = [
   {
@@ -69,9 +71,19 @@ const routes = [
     component: lStandard
   },
   {
+    path: '/eStandard:id',
+    name: 'editStandard',
+    component: eStandard
+  },
+  {
     path: '/cStandard',
     name: 'cStandard',
     component: cStandard
+  },
+  {
+    path: '/StandardxService',
+    name: 'StandardxService',
+    component: StandardxService
   },
   {
     path: '/about',
