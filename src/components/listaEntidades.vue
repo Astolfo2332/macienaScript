@@ -13,9 +13,10 @@
         ">
         <div class="card">
             <div class="card-header">
-                Titulo
+                Lista de entidades
             </div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -42,6 +43,7 @@
                     </tbody>
                 </table>
             </div>
+            </div>
             <div class="card-footer text-muted">
                 Copyright: maicenaScript 2023
             </div>
@@ -51,7 +53,30 @@
 
     </div>
 </template>
+<style>
 
+.card {
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.card-header {
+  background-color: #436991;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+</style>
 <script>
 export default {
     data(){

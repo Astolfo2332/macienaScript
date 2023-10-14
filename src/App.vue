@@ -1,13 +1,31 @@
 <template>
-  <nav>
-    <router-link to="/">Login</router-link> |
-    <router-link to="/cEntity">cEntity</router-link> |
-    <router-link to="/eList">EntityList</router-link> | 
-    <router-link to="/cUser">cUser</router-link> | 
-    <router-link to="/lUsers">lUser</router-link> | 
-    <router-link to="/usersxentity">UserXEntity</router-link> | 
-    <router-link to="/servicesList">lService</router-link> | 
-    <router-link to="/servicesxEntity">ServicexEntity</router-link> | 
+  <nav class="nav-container">
+    <router-link class="nav-link" to="/">Login</router-link> |
+    <router-link class="nav-link" to="/cEntity">cEntity</router-link> |
+    <router-link class="nav-link" to="/eList">EntityList</router-link> | 
+    <router-link class="nav-link" to="/cUser">cUser</router-link> | 
+    <router-link class="nav-link" to="/lUsers">lUser</router-link> | 
+    <router-link class="nav-link" to="/usersxentity">usersxentity</router-link> | 
+    <router-link class="nav-link" to="/servicesList">lService</router-link> | 
+    <router-link class="nav-link" to="/servicesxEntity">ServicexEntity</router-link> | 
   </nav>
   <router-view/>
 </template>
+
+<style>
+.nav-container {
+  background-color: rgba(74, 72, 72, 0.2);
+  padding: 5px;
+}
+
+.nav-link {
+  text-decoration: none; 
+  color: #000; 
+  transition: color; 
+  display: inline; 
+}
+
+.nav-link:hover {
+  color: #007bff; 
+}
+</style>

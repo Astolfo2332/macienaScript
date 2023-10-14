@@ -92,17 +92,25 @@
 </template>
 
 <style scoped>
-.cascading-right {
-      margin-right: -50px;
-    }
 
-    @media (max-width: 991.98px) {
-      .cascading-right {
-        margin-right: 0;
-      }
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(75, 75, 75, 0.1); 
+  }
+
+  @media (min-width: 992px) {
+    .cascading-right {
+      margin-right: 50px;
     }
+  }
 </style>
-
 <script>
 export default{
   data(){
