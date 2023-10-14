@@ -7,6 +7,8 @@ import cUsers from "../components/crearUsuario.vue"
 import usersList from "../components/listaUsuarios.vue"
 import eUsers from "../components/editarUsuarios.vue"
 import usersXEntity from "../components/listaUsuariosxEntidad.vue"
+import servicesList from "../components/listaServicios.vue"
+import servicesxEntity from "../components/listaServiciosxEntidad.vue"
 
 const routes = [
   {
@@ -48,6 +50,16 @@ const routes = [
     path: '/usersxentity',
     name: 'usersxentity',
     component: usersXEntity
+  },
+  {
+    path: '/servicesList',
+    name: 'servicesList',
+    component: servicesList
+  },
+  {
+    path: '/servicesxEntity',
+    name: 'servicesxEntity',
+    component: servicesxEntity
   },
   {
     path: '/about',
