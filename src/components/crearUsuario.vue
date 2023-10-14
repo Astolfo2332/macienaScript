@@ -147,14 +147,15 @@ methods:{
       let operation="SaveUser"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=encodeURI( this.nameUser+","+this.lastnameUser)
-      let phone=encodeURI( this.phoneUser)
-      let password=encodeURI( this.passwordUser)
-      let document=encodeURI( this.documentUser)
-      let position=encodeURI( this.positionUser)
-      let userType=encodeURI( this.userType)
-      let userEntityId=encodeURI( this.userEntityId)
-      console.log(userEntityId)
+      let name= encodeURIComponent(this.nameUser+","+this.lastnameUser)
+      const nickname=encodeURIComponent(this.nameUser.split(" ")[0]+this.lastnameUser.split(" ")[0]+Math.floor(1000 + Math.random() * 9000))
+      let phone=encodeURIComponent(this.phoneUser)
+      let password= encodeURIComponent(this.passwordUser)
+      let document= encodeURIComponent(this.documentUser)
+      let position= encodeURIComponent(this.positionUser)
+      let userType= encodeURIComponent(this.userType)
+      let userEntityId= encodeURIComponent(this.userEntityId)
+      
       const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
       "&tna="+tna+
       "&key="+key+
@@ -164,12 +165,14 @@ methods:{
       "&documentUser="+document+
       "&positionUser="+position+
       "&userType="+userType+
-      "&userEntityId="+userEntityId
-
+      "&userEntityId="+userEntityId+
+      "&nickname="+nickname
+      console.log(url)
       fetch(url)
       .then(response=>response.json())
       .then(response=>{console.log(response);
       if (response.valid==true){
+        console.log(response)
         alert("Usuario creado exitosamente con el id: "+response.userVO.id+" y usuario"+response.userVO.nickname)
       }
       })

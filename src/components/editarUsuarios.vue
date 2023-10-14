@@ -66,7 +66,7 @@
                   </div>
     
     
-                  <button type="submit" class="btn btn-primary btn-block mb-4" @click="UpdateUser">
+                  <button type="submit" class="btn btn-primary btn-block mb-4" @click="UpdateUser(usuario.nickname)">
                     Modificar
                   </button>
                   <router-link :to="{name:'lUsers'}" class="btn btn-warning btn-block mb-4">Cancelar</router-link>
@@ -158,18 +158,18 @@ export default{
             })
             .catch(console.log)
         },
-        UpdateUser(){
+        UpdateUser(nickname){
             if (this.passwordUser == this.passwordUser2){
             let operation="UpdateUser"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-            let name=encodeURI(this.usuario.firstName+","+this.usuario.lastName)
-            let phone=encodeURI( this.usuario.phone)
-            let password=encodeURI( this.passwordUser)
-            let document=encodeURI( this.usuario.document)
-            let position=encodeURI( this.usuario.position)
-            let userType=encodeURI( this.usuario.userType)
-            let userEntityId=encodeURI( this.usuario.entityID)
+            let name=encodeURIComponent(this.usuario.firstName+","+this.usuario.lastName)
+            let phone=encodeURIComponent( this.usuario.phone)
+            let password=encodeURIComponent( this.passwordUser)
+            let document=encodeURIComponent( this.usuario.document)
+            let position=encodeURIComponent( this.usuario.position)
+            let userType=encodeURIComponent( this.usuario.userType)
+            let userEntityId=encodeURIComponent( this.usuario.entityID)
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
@@ -181,10 +181,11 @@ export default{
             "&positionUser="+position+
             "&userType="+userType+
             "&userEntityId="+userEntityId
+            "&nickname="+nickname
             fetch(url)
             .then(response=>response.json())
             .then(response=>{console.log(response);
-            if (response.valid==true){
+            if (response.validVO){
             alert("Usuario modificado exitosamente con el id: "+response.userVO.id)
             window.location="/#/lUsers"
             }

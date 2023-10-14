@@ -87,9 +87,9 @@ methods:{SaveEntity(){
     let operation="SaveEntity"
     let tna=4
     let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=encodeURI(this.name)
-    let phone=encodeURI(this.phone)
-    let adress=encodeURI(this.adress)
+    let name=encodeURIComponent(this.name)
+    let phone=encodeURIComponent(this.phone)
+    let adress=encodeURIComponent(this.adress)
     const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
     "&tna="+tna+
     "&key="+key+
@@ -100,7 +100,7 @@ methods:{SaveEntity(){
     fetch(url)
     .then(response=>response.json())
     .then(response=>{console.log(response);
-    if (response.valid==true){
+    if (response.entityVO){
       alert("Entidad creada exitosamente con el id: "+response.entityVO.id)
     }
     })
