@@ -9,6 +9,8 @@ import eUsers from "../components/editarUsuarios.vue"
 import usersXEntity from "../components/listaUsuariosxEntidad.vue"
 import servicesList from "../components/listaServicios.vue"
 import servicesxEntity from "../components/listaServiciosxEntidad.vue"
+import cStandard from "../components/crearEstandar.vue"
+import lStandard from "../components/listarEstandares.vue"
 
 const routes = [
   {
@@ -60,6 +62,16 @@ const routes = [
     path: '/servicesxEntity',
     name: 'servicesxEntity',
     component: servicesxEntity
+  },
+  {
+    path: '/lStandard',
+    name: 'lStandard',
+    component: lStandard
+  },
+  {
+    path: '/cStandard',
+    name: 'cStandard',
+    component: cStandard
   },
   {
     path: '/about',

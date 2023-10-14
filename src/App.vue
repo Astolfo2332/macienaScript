@@ -8,6 +8,8 @@
     <router-link class="nav-link" to="/usersxentity">usersxentity</router-link> | 
     <router-link class="nav-link" to="/servicesList">lService</router-link> | 
     <router-link class="nav-link" to="/servicesxEntity">ServicexEntity</router-link> | 
+    <router-link class="nav-link" to="/lStandard">lStandart</router-link> | 
+    <router-link class="nav-link" to="/cStandard">cStandart</router-link> | 
   </nav>
   <router-view/>
 </template>
