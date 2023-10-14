@@ -31,7 +31,7 @@
               </div>
 
 
-              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveUser">
+              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveStandard">
                 Crear
               </button>
               <button type="reset" class="btn btn-danger btn-block mb-4">
@@ -105,14 +105,14 @@ methods:{
             })
             .catch(console.log)
         },
-      SaveUser(){
+        SaveStandard(){
 
       let operation="SaveStandard"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=this.name
-      let description=this.description
-      let serviceId=this.serviceId
+      let name=encodeURIComponent(this.name)
+      let description=encodeURIComponent(this.description)
+      let serviceId=encodeURIComponent(this.serviceId)
 
       const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
       "&tna="+tna+

@@ -95,14 +95,18 @@ export default{
         "&nameUser="+nameUser+
         "&passwordUser="+passwordUser+
         "&key="+key
-
+        console.log(url)
         fetch(url)
         .then(response=>response.json())
-        .then(response=>{console.log(response);
-        if (response.valid==false){
+        .then(response=>{console.log(response);       
+        if (response.error){
           alert(response.error)
         }
-        
+        else{
+          alert(response.message)
+        }
+
+  
         
         })
         .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

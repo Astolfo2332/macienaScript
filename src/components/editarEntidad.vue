@@ -79,19 +79,20 @@ export default{
   },
 methods:{
   queryEntityByTenancy(){
-            let operation="queryEntityByTenancy"
+            let operation="queryEntityById"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            const id=this.$route.params.id
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
-            "&key="+key
+            "&key="+key+
+            "&idEntity="+id
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
-                if(datosRespuesta.valid==true){
-                    this.entidades=datosRespuesta.arrayEntity;
-                    this.entidad = this.entidades.find((entity)=>entity.id==this.$route.params.id)
+                if(datosRespuesta.arrayEntity){
+                    this.entidad=datosRespuesta.arrayEntity[0];
                 }
             })
             .catch(console.log)
@@ -100,9 +101,9 @@ methods:{
     let operation="UpdateEntity"
     let tna=4
     let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=this.entidad.name
-    let phone=this.entidad.phone
-    let adress=this.entidad.adress
+    let name=encodeURIComponent(this.entidad.name)
+    let phone=encodeURIComponent(this.entidad.phone)
+    let adress=encodeURIComponent(this.entidad.adress)
     const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
     "&tna="+tna+
     "&key="+key+

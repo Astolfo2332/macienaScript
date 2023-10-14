@@ -111,25 +111,25 @@ export default{
     }},
     created:function(){
         this.queryEntityByTenancy()
-        this.queryUserByTenancy()
+        this.queryUserById()
     },
     methods:{
-        queryUserByTenancy(){
-            let operation="queryUserByTenancy"
+      queryUserById(){
+            let operation="queryUserById"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            const id=this.$route.params.id
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
-            "&key="+key
+            "&key="+key+
+            "&userId="+id
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
                 this.usuarios=[]
-                if(datosRespuesta.valid==true){
-                    const usuarios=datosRespuesta.arrayUser;
-                    let usuario =usuarios.find((user)=>user.id==this.$route.params.id)
-                    console.log(usuario)
+                if(datosRespuesta.arrayUser){
+                    const usuario=datosRespuesta.arrayUser[0];             
                     const parts=usuario.name.split(",")
                     usuario.firstName=parts[0]
                     usuario.lastName=parts[1]
@@ -180,8 +180,9 @@ export default{
             "&documentUser="+document+
             "&positionUser="+position+
             "&userType="+userType+
-            "&userEntityId="+userEntityId
+            "&userEntityId="+userEntityId+
             "&nickname="+nickname
+            console.log(url)
             fetch(url)
             .then(response=>response.json())
             .then(response=>{console.log(response);
