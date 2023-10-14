@@ -87,9 +87,9 @@ methods:{SaveEntity(){
     let operation="SaveEntity"
     let tna=4
     let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-    let name=this.name
-    let phone=this.phone
-    let adress=this.adress
+    let name=encodeURI(this.name)
+    let phone=encodeURI(this.phone)
+    let adress=encodeURI(this.adress)
     const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
     "&tna="+tna+
     "&key="+key+
