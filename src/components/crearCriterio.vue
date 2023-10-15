@@ -10,28 +10,33 @@
             backdrop-filter: blur(30px);
             ">
           <div class="card-body p-5 shadow-5 text-center">
-            <h2 class="fw-bold mb-5">Crear estandar</h2>
+            <h2 class="fw-bold mb-5">Crear criterio</h2>
             <form>
             
-              <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="name" required/>
-                <label class="form-label" for="form3Example4">Nombre del estandar:</label>
-              </div>
-
               <div class="form-outline mb-4">
                 <input type="text" id="form3Example4" class="form-control" v-model="description" required/>
                 <label class="form-label" for="form3Example4">Descripción</label>
               </div>
 
               <div class="form-outline mb-4">
-                <select class='form-select'  id="form3Example4" v-model="serviceId" required>
-                  <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.id"> {{ servicio.name }} </option>
+                <input type="text" id="form3Example4" class="form-control" v-model="response" required/>
+                <label class="form-label" for="form3Example4">Respuesta del criterio</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" id="form3Example4" class="form-control" v-model="observation" required/>
+                <label class="form-label" for="form3Example4">Observación del criterio</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <select class='form-select'  id="form3Example4" v-model="ids" required>
+                  <option v-for="estandar in estandares" :key="estandar.id" :value='{"datos":[estandar.id, estandar.serviceID]}'> {{ estandar.name }} </option>
                 </select>
-                <label class="form-label" for="form3Example4">Servicio</label>
+                <label class="form-label" for="form3Example4">Estandar</label>
               </div>
 
 
-              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveStandard">
+              <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveCriteria">
                 Crear
               </button>
               <button type="reset" class="btn btn-danger btn-block mb-4">
@@ -79,15 +84,15 @@
 export default{
   data(){
         return {
-           servicios:[]
+           estandares:[]
         }
     },
     created:function(){
-        this.queryServiceByTenancy()
+        this.queryStandardByTenancy()
     },
 methods:{
-  queryServiceByTenancy(){
-            let operation="queryServiceByTenancy"
+  queryStandardByTenancy(){
+            let operation="queryStandardByTenancy"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
@@ -97,35 +102,39 @@ methods:{
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
-                this.servicios=[]
+                this.estandares=[]
                 if(datosRespuesta.valid==true){
-                    this.servicios=datosRespuesta.arrayService;
+                    this.estandares=datosRespuesta.arrayStandard;
                 }
 
             })
             .catch(console.log)
         },
-        SaveStandard(){
+        SaveCriteria(){
 
-      let operation="SaveStandard"
+      let operation="SaveCriteria"
       let tna=4
       let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-      let name=encodeURIComponent(this.name)
       let description=encodeURIComponent(this.description)
-      let serviceId=encodeURIComponent(this.serviceId)
+      let response=encodeURIComponent(this.response)
+      let observation=encodeURIComponent(this.observation)
+      let standardId=encodeURIComponent(this.ids.datos[0])
+      let serviceId=encodeURIComponent(this.ids.datos[1])
 
       const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
       "&tna="+tna+
       "&key="+key+
-      "&nameStandard="+name+
-      "&descriptionStandard="+description+
-      "&serviceIdStandard="+serviceId
+      "&descriptionCriteria="+description+
+      "&answerCriteria="+response+
+      "&observationCriteria="+observation+
+      "&standardIdCriteria="+standardId+
+      "&serviceIdCriteria="+serviceId
 
       fetch(url)
       .then(response=>response.json())
       .then(response=>{console.log(response);
       if (response.valid==true){
-        alert("Estandar creado exitosamente con el id: "+response.standardVO.id)
+        alert("Criterio creado exitosamente con el id: "+response.criteriaVO.id)
       }
       })
       .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

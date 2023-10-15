@@ -13,6 +13,7 @@ import cStandard from "../components/crearEstandar.vue"
 import lStandard from "../components/listarEstandares.vue"
 import eStandard from "../components/editarEstandares.vue"
 import StandardxService from "../components/listarEstandaresXServicio.vue"
+import cCriteria from "../components/crearCriterio.vue"
 
 const routes = [
   {
@@ -84,6 +85,11 @@ const routes = [
     path: '/StandardxService',
     name: 'StandardxService',
     component: StandardxService
+  },
+  {
+    path: '/cCriteria',
+    name: 'cCriteria',
+    component: cCriteria
   },
   {
     path: '/about',
