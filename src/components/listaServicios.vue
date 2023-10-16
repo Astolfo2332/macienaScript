@@ -30,7 +30,7 @@
                             <td scope="row">{{servicio.id}}</td>
                             <td>{{servicio.name}}</td>
                             <td>{{servicio.description}}</td>
-                            <td>{{servicio.entityIdService}}</td>
+                            <td>{{servicio.entityName}}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
                                     <router-link :to="{name:'editServices', params:{id:servicio.id}}" class="btn btn-info">Editar</router-link>
