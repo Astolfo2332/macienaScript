@@ -43,7 +43,7 @@
                             <td>{{servicio.description}}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
-                                    <!-- <router-link :to="{name:'editServices', params:{id:servicio.id}}" class="btn btn-info">Editar</router-link> -->
+                                    <router-link :to="{name:'editServices', params:{id:servicio.id}}" class="btn btn-info">Editar</router-link>
                                     <button type="button" v-on:click="DeleteService(servicio.id)" class="btn btn-danger">Borrar</button>
                                 </div>
                             </td>

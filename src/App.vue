@@ -12,6 +12,7 @@
     <router-link class="nav-link" to="/lStandard">lStandart</router-link> | 
     <router-link class="nav-link" to="/StandardxService">StandardxService</router-link> |
     <router-link class="nav-link" to="/cCriteria">cCriteria</router-link> |
+    <router-link class="nav-link" to="/cService">cService</router-link> |
   </nav>
   <router-view/>
 </template>
