@@ -15,7 +15,7 @@
                 
                   <div class="form-outline mb-4">
                     <input type="text" id="form3Example4" class="form-control" v-model="name" required/>
-                    <label class="form-label" for="form3Example4">Nombre del servicio:</label>
+                    <label class="form-label" for="form3Example4">Nombre del servicio</label>
                   </div>
     
                   <div class="form-outline mb-4">
@@ -83,11 +83,11 @@
             }
         },
         created:function(){
-            this.queryServiceByTenancy()
+          this.queryEntityByTenancy()
         },
     methods:{
-      queryServiceByTenancy(){
-                let operation="queryServiceByTenancy"
+      queryEntityByTenancy(){
+                let operation="queryEntityByTenancy"
                 let tna=4
                 let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
                 const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
@@ -99,7 +99,7 @@
                     console.log(datosRespuesta)
                     this.entidades=[]
                     if(datosRespuesta.valid==true){
-                        this.entidades=datosRespuesta.arrayService;
+                        this.entidades=datosRespuesta.arrayEntity;
                     }
     
                 })
