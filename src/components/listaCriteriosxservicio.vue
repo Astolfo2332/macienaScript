@@ -105,13 +105,12 @@ export default {
             let operation="queryCriteriaByService"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-            let serviceIdCriteria=this.serviceIdCriteria
             let datosRespuesta2 = {}
 
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
-            "&serviceIdCriteria="+serviceIdCriteria
+            "&serviceIdCriteria="+idService
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
@@ -136,7 +135,7 @@ export default {
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
-            "&userId="+id
+            "&idCriteria="+id
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{

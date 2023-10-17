@@ -156,7 +156,7 @@ export default {
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
-            "&userId="+id
+            "&idCriteria="+id
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
