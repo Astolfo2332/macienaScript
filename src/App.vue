@@ -13,6 +13,9 @@
     <router-link class="nav-link" to="/StandardxService">StandardxService</router-link> |
     <router-link class="nav-link" to="/cCriteria">cCriteria</router-link> |
     <router-link class="nav-link" to="/cService">cService</router-link> |
+    <router-link class="nav-link" to="/lCxs">ListCritxserv</router-link> |
+    <router-link class="nav-link" to="/lCxStan">ListCritxStan</router-link> |
+    <router-link class="nav-link" to="/lCxStanxServ">ListCritxStanxServ</router-link> |
   </nav>
   <router-view/>
 </template>

@@ -16,6 +16,10 @@ import StandardxService from "../components/listarEstandaresXServicio.vue"
 import cCriteria from "../components/crearCriterio.vue"
 import cService from "../components/crearServicio.vue"
 import eService from "../components/editarServicio.vue"
+import lCritxServ from "../components/listaCriteriosxservicio.vue"
+import lCritxStan from "../components/listaCriteriosxestandar.vue"
+import lCritxStanxServ from "../components/listaCriteriosxestandarxservice.vue"
+
 
 const routes = [
   {
@@ -102,6 +106,21 @@ const routes = [
     path: '/eService:id',
     name: 'editServices',
     component: eService
+  },
+  {
+    path: '/lCxs',
+    name: 'listCritxServices',
+    component: lCritxServ
+  },
+  {
+    path: '/lCxStan',
+    name: 'listCritxStandard',
+    component: lCritxStan
+  },
+  {
+    path: '/lCxStanxServ',
+    name: 'listCritxStandardxStan',
+    component: lCritxStanxServ
   },
   {
     path: '/about',
