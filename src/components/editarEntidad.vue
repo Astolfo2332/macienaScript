@@ -97,7 +97,7 @@ methods:{
             })
             .catch(console.log)
         },
-  UpdateEntity(){
+    UpdateEntity(){
     let operation="UpdateEntity"
     let tna=4
     let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"

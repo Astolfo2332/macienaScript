@@ -50,7 +50,7 @@
                             
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
-                                     <!-- <router-link :to="{name:'editUsers', params:{id:usuario.id}}" class="btn btn-info">Editar</router-link>  -->
+                                     <router-link :to="{name:'eCriteria', params:{id:criterio.id}}" class="btn btn-info">Editar</router-link>  
                                     <button type="button" v-on:click="DeleteCriteria(criterio.id)" class="btn btn-danger">Borrar</button>
                                 </div>
                             </td>

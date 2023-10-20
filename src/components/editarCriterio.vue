@@ -14,17 +14,17 @@
                 <form v-on:submit.prevent="UpdateService">
                   
                   <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="description" required/>
+                <input type="text" id="form3Example4" class="form-control" v-model="criterio.description" required/>
                 <label class="form-label" for="form3Example4">Descripción</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="response" required/>
+                <input type="text" id="form3Example4" class="form-control" v-model="criterio.response" required/>
                 <label class="form-label" for="form3Example4">Respuesta del criterio</label>
               </div>
 
               <div class="form-outline mb-4">
-                <input type="text" id="form3Example4" class="form-control" v-model="observation" required/>
+                <input type="text" id="form3Example4" class="form-control" v-model="criterio.observation" required/>
                 <label class="form-label" for="form3Example4">Observación del criterio</label>
               </div>
 
@@ -75,7 +75,7 @@
     export default{
       data(){
         return{
-          entidades:[]
+          criterio:{}
         }
         
       },
@@ -122,28 +122,35 @@
                 })
                 .catch(console.log)
             },
-      UpdateService(){
-        console.log("Si")
-        let operation="UpdateService"
+        UpdateCriteria(){
+      
+        let operation="UpdateCriteria"
         let tna=4
         let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-        let name=encodeURIComponent(this.name)
+
         let description=encodeURIComponent(this.description)
-        let entityIdService=encodeURIComponent(this.entityIdService)
+        let response=encodeURIComponent(this.response)
+        let observation=encodeURIComponent(this.observation)
+        let standardId=encodeURIComponent(this.ids.datos[0])
+        let serviceId=encodeURIComponent(this.ids.datos[1])
+
+
         const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
         "&tna="+tna+
         "&key="+key+
-        "&nameService="+name+
-        "&descriptionService="+description+
-        "&entityIdService="+entityIdService+
-        "&idService="+this.$route.params.id
+        "&descriptionCriteria="+description+
+        "&answerCriteria="+response+
+        "&observationCriteria="+observation+
+        "&standardIdCriteria="+standardId+
+        "&serviceIdCriteria="+serviceId+
+        "&idCriteria="+this.$route.params.id
         console.log(url)
         fetch(url)
         .then(response=>response.json())
         .then(response=>{console.log(response);
         if (response.valid==true){
           alert("Entidad modificada exitosamente con el id: "+response.serviceVO.id)
-          window.location="/#/servicesList"
+          window.location="/#/lCxs"
         }
         })
         .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

@@ -19,7 +19,7 @@ import eService from "../components/editarServicio.vue"
 import lCritxServ from "../components/listaCriteriosxservicio.vue"
 import lCritxStan from "../components/listaCriteriosxestandar.vue"
 import lCritxStanxServ from "../components/listaCriteriosxestandarxservice.vue"
-
+import eCriteria from "../components/editarCriterio.vue"
 
 const routes = [
   {
@@ -41,6 +41,11 @@ const routes = [
     path: '/eEntity:id',
     name: 'eEntity',
     component: eEntity
+  },
+  {
+    path: '/eCriteria:id',
+    name: 'eCriteria',
+    component: eCriteria
   },
   {
     path: '/cUser',

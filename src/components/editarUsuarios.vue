@@ -10,7 +10,7 @@
                 backdrop-filter: blur(30px);
                 ">
               <div class="card-body p-5 shadow-5 text-center">
-                <h2 class="fw-bold mb-5">Crear usuario</h2>
+                <h2 class="fw-bold mb-5">Editar usuario</h2>
                 <form>
                 <div class="row">
                     <div class="col-md-6 mb-4">
@@ -186,7 +186,7 @@ export default{
             fetch(url)
             .then(response=>response.json())
             .then(response=>{console.log(response);
-            if (response.validVO){
+            if (response.userVO){
             alert("Usuario modificado exitosamente con el id: "+response.userVO.id)
             window.location="/#/lUsers"
             }

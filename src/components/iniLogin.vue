@@ -92,7 +92,7 @@ export default{
         let passwordUser=encodeURI(this.passwordUser)
         const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
         "&tna="+tna+
-        "&nameUser="+nameUser+
+        "&nickname="+nameUser+
         "&passwordUser="+passwordUser+
         "&key="+key
         console.log(url)
