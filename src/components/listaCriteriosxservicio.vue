@@ -50,8 +50,10 @@
                             
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
+                                    <input class="form-check-input" type="checkbox">
                                     <router-link :to="{name:'eCriteria', params:{id:criterio.id}}" class="btn btn-info">Editar</router-link> 
                                     <button type="button" v-on:click="DeleteCriteria(criterio.id)" class="btn btn-danger">Borrar</button>
+                                    
                                 </div>
                             </td>
                         </tr>
