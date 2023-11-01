@@ -21,8 +21,14 @@
       </nav>
     </div>
     <button @click="toggleMenu" class="menu-toggle" :class="{ 'show': showMenu }"><i class="fas fa-bars"></i></button> 
-    <img src="./assets/coco.png" alt="Logo" class="logo" :class="{ 'show': showMenu }">
-    <div class="main-content">
+    <div class="center-box">
+    <img src="./assets/coco.png" alt="Logo" class="logo" >
+    <div class="inner-box">
+        <p >Bienvenido {{userInfo}} </p>
+         <button @click="clearUser"  class="btn btn-danger btn-block mb-4">Salir</button>
+    </div>
+    </div>
+        <div class="main-content">
       <router-view />
     </div>
   </div>
@@ -38,8 +44,18 @@ export default {
   methods: {
     toggleMenu() {
       this.showMenu = !this.showMenu;
-    }
-  }
+    },
+    clearUser(){
+        localStorage.removeItem("name");
+        localStorage.removeItem("userType");
+        localStorage.removeItem("id");
+     }
+    },
+    computed: {
+        userInfo(){
+            return localStorage.getItem("name");
+            }
+        }
 };
 </script>
 
@@ -50,18 +66,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #503d2c;
   position: relative;
-}
+}-
 .main-content {
   margin-left: 1%;
 }
 
 .logo {
-  position: absolute;
-  top: 0%;
-  right: 2%;
-  width: 5%;
-  height: auto;
-  z-index: 1;
+    max-height: 120px;
+    max-width: 10 px;
+    margin-right: 50 px;
 }
 
 .menu-toggle {
@@ -117,5 +130,14 @@ export default {
 }
 .nav-link i{
   margin-right:5%;
+}
+.center-box{
+display: flex;
+justify-content: right;
+align-items: center;
+    }
+.inner-box{
+    padding: 20 px;
+    text-align: right;
 }
 </style>

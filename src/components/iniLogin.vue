@@ -104,10 +104,10 @@ export default{
         }
         else{
           alert(response.message)
+			localStorage.setItem("name",response.userVO.name)
+			localStorage.setItem("userType",response.userVO.userType)
+			localStorage.setItem("id",response.userVO.id)
         }
-
-  
-        
         })
         .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
         }
