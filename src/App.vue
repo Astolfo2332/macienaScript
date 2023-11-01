@@ -24,7 +24,8 @@
     <div class="center-box">
     <img src="./assets/coco.png" alt="Logo" class="logo" >
     <div class="inner-box">
-        <p >Bienvenido {{userInfo}} </p>
+        <p >Bienvenido </p>
+        <p>{{userInfo}}</p>
          <button @click="clearUser"  class="btn btn-danger btn-block mb-4">Salir</button>
     </div>
     </div>
@@ -138,6 +139,7 @@ align-items: center;
     }
 .inner-box{
     padding: 20 px;
-    text-align: right;
+    text-align: center;
+    font-size: 15 px;
 }
 </style>
