@@ -178,7 +178,7 @@ methods:{
       if (response.userVO){
         console.log(response)
         alert("Usuario creado exitosamente con el id: "+response.userVO.id+" y usuario: "+response.userVO.nickname)
-        window.location("/#/lUsers")
+        window.location="/#/lUsers"
       }
       })
       .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
