@@ -101,12 +101,14 @@ export default{
         .then(response=>{console.log(response);       
         if (response.error){
           alert(response.error)
+          localStorage.setItem("auth",false)
         }
         else{
           alert(response.message)
 			localStorage.setItem("name",response.userVO.name)
 			localStorage.setItem("userType",response.userVO.userType)
-			localStorage.setItem("id",response.userVO.id)
+			localStorage.setItem("id",response.userVO.idb)
+			localStorage.setItem("auth","true")
         }
         })
         .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

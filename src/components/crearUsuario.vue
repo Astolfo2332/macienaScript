@@ -35,6 +35,7 @@
               <div class="form-outline mb-4">
                 <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2" required/>
                 <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
+                <p v-if="passwordUser=!passwordUser2" style="color:red">Contraseñas no coinciden</p>
               </div>
 
               <div class="form-outline mb-4">
@@ -54,8 +55,10 @@
                 <label class="form-label" for="form3Example4">Posición de usuario</label>
               </div>
 
-              <div class="form-outline mb-4">
-                <input type="number" id="form3Example4" class="form-control" v-model="userType" required/>
+           <div class="form-outline mb-4">
+                <select class='form-select'  id="form3Example4" v-model="userType" required>
+                  <option v-for="posicion in posiciones" :key="posicion.id" :value="posicion.id"> {{ posicion.name }} </option>
+                </select>
                 <label class="form-label" for="form3Example4">Tipo de usuario</label>
               </div>
 
@@ -115,7 +118,8 @@
 export default{
   data(){
         return {
-            entidades:[]
+            entidades:[],
+            posiciones:[{id:1,name:"Super admin"},{id:2,name:"Admin"},{id:3,name:"Admin entidad"},{id:4,name:"Usuario"},]
         }
     },
     created:function(){
@@ -171,9 +175,10 @@ methods:{
       fetch(url)
       .then(response=>response.json())
       .then(response=>{console.log(response);
-      if (response.valid==true){
+      if (response.userVO){
         console.log(response)
-        alert("Usuario creado exitosamente con el id: "+response.userVO.id+" y usuario"+response.userVO.nickname)
+        alert("Usuario creado exitosamente con el id: "+response.userVO.id+" y usuario: "+response.userVO.nickname)
+        window.location("/#/lUsers")
       }
       })
       .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))

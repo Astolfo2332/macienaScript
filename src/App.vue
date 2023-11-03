@@ -50,6 +50,9 @@ export default {
         localStorage.removeItem("name");
         localStorage.removeItem("userType");
         localStorage.removeItem("id");
+        localStorage.setItem("auth",false)
+        window.location="/#/"
+        alert("Sesión cerrada exitosamente")
      }
     },
     computed: {
