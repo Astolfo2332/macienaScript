@@ -2,28 +2,29 @@
   <div id="app">
     <div class="sidebar" :class="{ 'show': showMenu }">
       <nav class="nav-container">
-        <router-link class="nav-link" to="/"><i class="fas fa-code"></i>Login</router-link>
-        <router-link class="nav-link" to="/cEntity"><i class="fas fa-stethoscope"></i>cEntity</router-link>
-        <router-link class="nav-link" to="/eList"><i class="fas fa-list"></i>EntityList</router-link>
-        <router-link class="nav-link" to="/cUser"><i class="fas fa-user-plus"></i>cUser</router-link>
-        <router-link class="nav-link" to="/lUsers"><i class="fas fa-users"></i>lUser</router-link>
-        <router-link class="nav-link" to="/usersxentity"><i class="fas fa-user-friends"></i>usersxentity</router-link>
-        <router-link class="nav-link" to="/servicesList"><i class="fas fa-list-alt"></i>lService</router-link>
-        <router-link class="nav-link" to="/servicesxEntity"><i class="fas fa-address-book"></i>ServicexEntity</router-link>
-        <router-link class="nav-link" to="/cStandard"><i class="fas fa-pager"></i>cStandart</router-link> 
-        <router-link class="nav-link" to="/lStandard"><i class="fas fa-list-ol"></i>lStandart</router-link>
-        <router-link class="nav-link" to="/StandardxService"><i class="fas fa-handshake"></i>StandardxService</router-link>
-        <router-link class="nav-link" to="/cCriteria"><i class="fas fa-clipboard"></i>cCriteria</router-link>
-        <router-link class="nav-link" to="/cService"><i class="fas fa-cog"></i>cService</router-link>
-        <router-link class="nav-link" to="/lCxs"><i class="fas fa-light fa-address-book"></i>ListCritxserv</router-link>
-        <router-link class="nav-link" to="/lCxStan"><i class="fas fa-tasks"></i>ListCritxStan</router-link>
-        <router-link class="nav-link" to="/lCxStanxServ"><i class="fas fa-tasks"></i>ListCritxStanxServ</router-link>
+        <router-link v-show="isAuth" class="nav-link" to="/"><i class="fas fa-home"></i>Home</router-link>
+        <router-link v-show="isAuth" class="nav-link" to="/login"><i class="fas fa-code"></i>Login</router-link>
+        <router-link v-show="vUser2" class="nav-link" to="/cEntity"><i class="fas fa-stethoscope"></i>cEntity</router-link>
+        <router-link v-show="vUser2" class="nav-link" to="/eList"><i class="fas fa-list"></i>EntityList</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cUser"><i class="fas fa-user-plus"></i>cUser</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/lUsers"><i class="fas fa-users"></i>lUser</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/usersxentity"><i class="fas fa-user-friends"></i>usersxentity</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/servicesList"><i class="fas fa-list-alt"></i>lService</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/servicesxEntity"><i class="fas fa-address-book"></i>ServicexEntity</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cStandard"><i class="fas fa-pager"></i>cStandart</router-link> 
+        <router-link  v-show="vUser3" class="nav-link" to="/lStandard"><i class="fas fa-list-ol"></i>lStandart</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/StandardxService"><i class="fas fa-handshake"></i>StandardxService</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cCriteria"><i class="fas fa-clipboard"></i>cCriteria</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cService"><i class="fas fa-cog"></i>cService</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/lCxs"><i class="fas fa-light fa-address-book"></i>ListCritxserv</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/lCxStan"><i class="fas fa-tasks"></i>ListCritxStan</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/lCxStanxServ"><i class="fas fa-tasks"></i>ListCritxStanxServ</router-link>
       </nav>
     </div>
     <button @click="toggleMenu" class="menu-toggle" :class="{ 'show': showMenu }"><i class="fas fa-bars"></i></button> 
     <div class="center-box">
     <img src="./assets/coco.png" alt="Logo" class="logo" >
-    <div class="inner-box">
+    <div v-show="!isAuth" class="inner-box">
         <p >Bienvenido </p>
         <p>{{userInfo}}</p>
          <button @click="clearUser"  class="btn btn-danger btn-block mb-4">Salir</button>
@@ -39,7 +40,8 @@
 export default {
   data() {
     return {
-      showMenu: false
+      showMenu: false,
+    
     };
   },
   methods: {
@@ -51,15 +53,56 @@ export default {
         localStorage.removeItem("userType");
         localStorage.removeItem("id");
         localStorage.setItem("auth",false)
-        window.location="/#/"
         alert("Sesión cerrada exitosamente")
-     }
-    },
+        window.location="/#/"
+        window.location.reload()
+     },
+  },
     computed: {
+
         userInfo(){
             return localStorage.getItem("name");
+            },
+        isAuth(){
+            if (localStorage.getItem("auth")=="true"){
+                console.log("recarga")
+                return false
             }
-        }
+            else {
+                console.log("no recarga")
+                return true
+            }
+        },
+        vUser2(){
+            if (localStorage.getItem("auth")=="true"){
+             if (2>=localStorage.getItem("userType")){
+                return true
+            }
+            else{
+                return false
+            }
+            }
+            else {
+                return false
+            }
+        },
+        vUser3(){
+            if (localStorage.getItem("auth")=="true"){
+             if (3>=localStorage.getItem("userType")){
+                return true
+            }
+            else{
+                return false
+            }
+            }
+            else {
+                return false
+            }
+        },
+
+    }
+    
+        
 };
 </script>
 

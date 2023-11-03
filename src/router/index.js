@@ -162,8 +162,8 @@ const router = createRouter({
 })
 router.beforeEach((to,from,next)=>{
     const auth="true"==localStorage.getItem("auth") 
-    const rtUser=to.matched.some((pag)=>pag.meta.userType)
-    const rAuth=to.matched.some((pag)=>pag.meta.requireAuth)
+    const rtUser=to.meta.userType
+    const rAuth=to.meta.requireAuth
     const tUser=localStorage.getItem("userType")
     if (!auth&&rAuth){
         alert("Inicie sesión primero")
@@ -172,8 +172,12 @@ router.beforeEach((to,from,next)=>{
     else{
         if (rtUser>=tUser){
        next() 
+            console.log("req",rtUser)
+            console.log("type",tUser)
         }
         else{
+            console.log("req",rtUser)
+            console.log("type",tUser)
             alert("Permisos no validos")
             next("/")
         }
