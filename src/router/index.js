@@ -123,7 +123,7 @@ const routes = [
     component: lCritxStan
   },
   {
-    path: '/lCxStanxServ',
+    path: '/lCxStanxServ:id',
     name: 'listCritxStandardxStan',
     component: lCritxStanxServ
   },

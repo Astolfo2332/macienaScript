@@ -32,10 +32,12 @@
                             <td>{{entidad.name}}</td>
                             <td>{{ entidad.phone }}</td>
                             <td>{{entidad.adress}}</td>
+                            <td></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
                                     <router-link :to="{name:'eEntity', params:{id:entidad.id}}" class="btn btn-info">Editar</router-link> 
                                     <button type="button" v-on:click="DeleteEntity(entidad.id)" class="btn btn-danger">Borrar</button>
+                                    <router-link :to="{name:'listCritxStandardxStan', params:{id:entidad.id}}" class="btn btn-info">Criterios</router-link> 
                                 </div>
                             </td>
                         </tr>
