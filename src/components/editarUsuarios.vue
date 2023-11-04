@@ -33,6 +33,7 @@
                   </div>
                   <div class="form-outline mb-4">
                 <input type="password" id="form3Example4" class="form-control" v-model="passwordUser2" required/>
+                <p v-if="passwordUser=!passwordUser2" style="color:red">Contraseñas no coinciden</p>
                     <label class="form-label" for="form3Example4">Confirmar Contraseña</label>
                 </div>
     
@@ -188,7 +189,7 @@ export default{
             .then(response=>{console.log(response);
             if (response.userVO){
             alert("Usuario modificado exitosamente con el id: "+response.userVO.id)
-            window.location="/#/lUsers"
+            window.location("/#/lUsers")
             }
             })
             .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
