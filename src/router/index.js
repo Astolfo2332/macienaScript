@@ -149,7 +149,7 @@ const routes = [
     , meta:{userType:4,requireAuth:true}
   },
   {
-    path: '/lCxStanxServ',
+    path: '/lCxStanxServ:id',
     name: 'listCritxStandardxStan',
     component: lCritxStanxServ
     , meta:{userType:4,requireAuth:true}

@@ -16,28 +16,16 @@
                 Lista de criterios por estandar por servicio
             </div>
             
-            <form>
-            <div class="form-outline mb-4">
-                <select class='form-select'  id="form3Example4" v-model="serviceIdCriteria" required>
-                    <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.id"> {{ servicio.name }} </option>
-                </select>
-                <label class="form-label" for="form3Example4">Servicio</label>
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-outline mb-4">
+                    <select class="form-select" id="form3Example4" v-model="servicelist" required>
+                    <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.id">{{ servicio.name }}</option>
+                    </select>
+                    <label class="form-label" for="form3Example4">Servicio</label>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block mb-4" @click="queryStandardByService(serviceIdCriteria)">
-                Buscar estandares
-              </button>
-        </form>
-        <form>
-            <div class="form-outline mb-4">
-                <select class='form-select'  id="form3Example4" v-model="estandarIdCriteria" required>
-                    <option v-for="estandar in estandares" :key="estandar.id" :value="estandar.id"> {{ estandar.name }} </option>
-                </select>
-                <label class="form-label" for="form3Example4">Estandar</label>
-                <button type="submit" class="btn btn-primary btn-block mb-4" @click="queryCriteriaByStand(estandarIdCriteria)">
-                    Buscar criterios
-              </button>
             </div>
-            </form>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table">
@@ -47,8 +35,7 @@
                             <th>Descripción</th>
                             <th>Respuesta del criterio</th>
                             <th>Observación del criterio</th>
-                            <th>Entidad</th>
-                            <th>Servicio</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,12 +44,15 @@
                             <td>{{criterio.description}}</td>
                             <td>{{criterio.answer}}</td>
                             <td>{{criterio.observation}}</td>
-                            <td>{{criterio.entityName}}</td>
-                            <td>{{criterio.servicedName}}</td>
-                            
+                            <td>
+                                <select class="form-select" id="form3Example10" v-model="state">
+                                    <option>C</option>
+                                    <option>NC</option>
+                                    <option>NA</option>
+                                </select>
+                            </td>   
                             <td>
                                 <div class="btn-group" role="group" aria-label="">
-                                    <input class="form-check-input" type="checkbox">
                                     <router-link :to="{name:'eCriteria', params:{id:criterio.id}}" class="btn btn-info">Editar</router-link> 
                                     <button type="button" v-on:click="DeleteCriteria(criterio.id)" class="btn btn-danger">Borrar</button>
                                 </div>
@@ -89,20 +79,33 @@ export default {
         return {
             criterios:[],
             estandares:[],
-            servicios:[]
+            servicios:[],
+            servicelist:99999,
         }
     },
     created:function(){
-        this.queryServiceByTenancy()
+        this.queryServiceByEntity()
+    },
+    watch: {
+        servicelist: function (nuebo) {
+            this.queryStandardByService(nuebo);
+            console.log('SZ')
+        },
+        standardlits: function (nuebo2) {
+            this.queryCriteriaByStand(nuebo2);
+            console.log('SZ')
+        },
     },
     methods:{
-        queryServiceByTenancy(){
-            let operation="queryServiceByTenancy"
+        queryServiceByEntity(){
+            let operation="queryServiceByEntity"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            const ide=this.$route.params.id
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
-            "&key="+key
+            "&key="+key+
+            "&entityIdService="+ide
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
@@ -115,14 +118,14 @@ export default {
             })
             .catch(console.log)
         },
-        queryStandardByService(idService){
+        queryStandardByService(service){
             let operation="queryStandardByService"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
             "&tna="+tna+
             "&key="+key+
-            "&serviceIdStandard="+idService
+            "&serviceIdStandard="+service
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
@@ -131,24 +134,26 @@ export default {
                 if(datosRespuesta.valid==true){
                     this.estandares=datosRespuesta.arrayStandard;
                 }
-
+                this.criterios = []
+                for(var i; i<=this.estandares.length; i++){
+                    this.queryCriteriaByStand(this.estandares[i].id)
+                }
             })
             .catch(console.log)
         },
-        queryCriteriaByStand(idStandard){
+        queryCriteriaByStand(standard){
             let operation="queryCriteriaByStandard"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             console.log(operation)
             console.log(tna)
             console.log(key)
-            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+"&tna="+tna+"&key="+key+"&standardIdCriteria="+idStandard
+            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+"&tna="+tna+"&key="+key+"&standardIdCriteria="+standard
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
-                this.criterios=[]
                 if(datosRespuesta.valid==true){
-                    this.criterios=datosRespuesta.arrayCriteria;
+                    this.criterios.push(datosRespuesta.arrayCriteria);
                 }
 
             })
