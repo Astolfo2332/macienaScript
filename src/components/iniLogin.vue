@@ -104,13 +104,11 @@ export default{
           localStorage.setItem("auth",false)
         }
         else{
+          alert(response.message)
 			localStorage.setItem("name",response.userVO.name)
 			localStorage.setItem("userType",response.userVO.userType)
 			localStorage.setItem("id",response.userVO.idb)
 			localStorage.setItem("auth","true")
-            window.location="/"
-            window.location.reload()
-            alert(response.message)
         }
         })
         .catch((error=>{console.error("Error:",error);alert("Paso algo no sé que fue")}))
