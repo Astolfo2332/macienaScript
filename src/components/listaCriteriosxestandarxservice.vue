@@ -129,11 +129,11 @@ export default {
                 .then((datosRespuesta)=>{
                     
                     if(datosRespuesta.valid==true){
-                        for (let i=0;i<datosRespuesta.arrayCriteria.length;i++){
+                        for (let j=0;j<datosRespuesta.arrayCriteria.length;j++){
                             datosRespuesta.arrayCriteria.sort(function(a,b){
                                 return a.id - b.id;
                             })
-                            this.criterios.push([datosRespuesta.arrayCriteria[i], this.estandares[i].id, this.estandares[i].name]);
+                            this.criterios.push([datosRespuesta.arrayCriteria[j], this.estandares[i].id, this.estandares[i].name]);
                         }
                         console.log(this.criterios)
                         this.criterios.sort(function(a, b) {
