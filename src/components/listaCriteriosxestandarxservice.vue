@@ -43,10 +43,15 @@
                             <td scope="row">{{criterio[0].id}}</td>
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
-                            <td><input class="form-control" type="text" v-model="criterio[0].answer" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
-                            <td><input class="form-control" placeholder="Comentarios" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
+                            <td>
+                                <select class="form-select" id="form3Example4" v-model="criterio[0].answer" @change="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)">
+                                    <option value="C" :selected="criterio[0].answer === 'C'">Cumple</option>
+                                    <option value="NC" :selected="criterio[0].answer === 'NC'">No Cumple</option>
+                                    <option value="NA" :selected="criterio[0].answer === 'NA'">No Aplica</option>
+                                </select>
+                            </td>
+                            <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </div>
