@@ -32,6 +32,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Estandar</th>
                             <th>Descripción</th>
                             <th>Respuesta del criterio</th>
                             <th>Observación del criterio</th>
@@ -40,10 +41,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="criterio in criterios" :key="criterio.id">
-                            <td scope="row">{{criterio.id}}</td>
-                            <td>{{criterio.description}}</td>
-                            <td>{{criterio.answer}}</td>
-                            <td>{{criterio.observation}}</td>
+                            <td scope="row">{{criterio[0].id}}</td>
+                            <td>{{criterio[2]}}</td>
+                            <td>{{criterio[0].description}}</td>
+                            <td>{{criterio[0].answer}}</td>
+                            <td>{{criterio[0].observation}}</td>
                             <td>
                                 <select class="form-select" id="form3Example10" v-model="state">
                                     <option>C</option>
@@ -89,11 +91,6 @@ export default {
     watch: {
         servicelist: function (nuebo) {
             this.queryStandardByService(nuebo);
-            console.log('SZ')
-        },
-        standardlits: function (nuebo2) {
-            this.queryCriteriaByStand(nuebo2);
-            console.log('SZ')
         },
     },
     methods:{
@@ -118,6 +115,35 @@ export default {
             })
             .catch(console.log)
         },
+        queryCriteriaByStand(){
+            let operation="queryCriteriaByStandard"
+            let tna=4
+            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            console.log(this.estandares.length)
+            for (let i=0;i<this.estandares.length;i++){
+                console.log(this.estandares)
+                console.log("LLAMEN A LA POLICIA")
+                const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+"&tna="+tna+"&key="+key+"&standardIdCriteria="+this.estandares[i].id
+                fetch(url)
+                .then(respuesta=>respuesta.json())
+                .then((datosRespuesta)=>{
+                    
+                    if(datosRespuesta.valid==true){
+                        for (let i=0;i<datosRespuesta.arrayCriteria.length;i++){
+                            datosRespuesta.arrayCriteria.sort(function(a,b){
+                                return a.id - b.id;
+                            })
+                            this.criterios.push([datosRespuesta.arrayCriteria[i], this.estandares[i].id, this.estandares[i].name]);
+                        }
+                        console.log(this.criterios)
+                        this.criterios.sort(function(a, b) {
+                        return a[1] - b[1];
+                        });
+                    }
+                })
+                .catch(console.log)
+            }
+        },
         queryStandardByService(service){
             let operation="queryStandardByService"
             let tna=4
@@ -135,30 +161,12 @@ export default {
                     this.estandares=datosRespuesta.arrayStandard;
                 }
                 this.criterios = []
-                for(var i; i<=this.estandares.length; i++){
-                    this.queryCriteriaByStand(this.estandares[i].id)
-                }
+                this.queryCriteriaByStand()
+                
             })
             .catch(console.log)
         },
-        queryCriteriaByStand(standard){
-            let operation="queryCriteriaByStandard"
-            let tna=4
-            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-            console.log(operation)
-            console.log(tna)
-            console.log(key)
-            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+"&tna="+tna+"&key="+key+"&standardIdCriteria="+standard
-            fetch(url)
-            .then(respuesta=>respuesta.json())
-            .then((datosRespuesta)=>{
-                if(datosRespuesta.valid==true){
-                    this.criterios.push(datosRespuesta.arrayCriteria);
-                }
-
-            })
-            .catch(console.log)
-        },
+        
         DeleteCriteria(id){
             let operation="DeleteCriteria"
             let tna=4
