@@ -43,8 +43,8 @@
                             <td scope="row">{{criterio[0].id}}</td>
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
-                            <td><input type="text" v-model="criterio[0].answer" @input="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
-                            <td><input type="text" v-model="criterio[0].observation" @input="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
+                            <td><input class="form-control" type="text" v-model="criterio[0].answer" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
+                            <td><input class="form-control" placeholder="Comentarios" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
                         </tr>
                         
                     </tbody>
