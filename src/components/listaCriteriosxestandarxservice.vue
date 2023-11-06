@@ -36,7 +36,6 @@
                             <th>Descripción</th>
                             <th>Respuesta del criterio</th>
                             <th>Observación del criterio</th>
-                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,21 +43,8 @@
                             <td scope="row">{{criterio[0].id}}</td>
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
-                            <td>{{criterio[0].answer}}</td>
-                            <td>{{criterio[0].observation}}</td>
-                            <td>
-                                <select class="form-select" id="form3Example10" v-model="state">
-                                    <option>C</option>
-                                    <option>NC</option>
-                                    <option>NA</option>
-                                </select>
-                            </td>   
-                            <td>
-                                <div class="btn-group" role="group" aria-label="">
-                                    <router-link :to="{name:'eCriteria', params:{id:criterio.id}}" class="btn btn-info">Editar</router-link> 
-                                    <button type="button" v-on:click="DeleteCriteria(criterio.id)" class="btn btn-danger">Borrar</button>
-                                </div>
-                            </td>
+                            <td><input type="text" v-model="criterio[0].answer" @input="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
+                            <td><input type="text" v-model="criterio[0].observation" @input="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
                         </tr>
                         
                     </tbody>
@@ -106,7 +92,6 @@ export default {
             fetch(url)
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
-                console.log(datosRespuesta)
                 this.servicios=[]
                 if(datosRespuesta.valid==true){
                     this.servicios=datosRespuesta.arrayService;
@@ -119,15 +104,12 @@ export default {
             let operation="queryCriteriaByStandard"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
-            console.log(this.estandares.length)
             for (let i=0;i<this.estandares.length;i++){
-                console.log(this.estandares)
-                console.log("LLAMEN A LA POLICIA")
                 const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+"&tna="+tna+"&key="+key+"&standardIdCriteria="+this.estandares[i].id
                 fetch(url)
                 .then(respuesta=>respuesta.json())
                 .then((datosRespuesta)=>{
-                    
+                    console.log(datosRespuesta.arrayCriteria)
                     if(datosRespuesta.valid==true){
                         for (let j=0;j<datosRespuesta.arrayCriteria.length;j++){
                             datosRespuesta.arrayCriteria.sort(function(a,b){
@@ -135,7 +117,6 @@ export default {
                             })
                             this.criterios.push([datosRespuesta.arrayCriteria[j], this.estandares[i].id, this.estandares[i].name]);
                         }
-                        console.log(this.criterios)
                         this.criterios.sort(function(a, b) {
                         return a[1] - b[1];
                         });
@@ -182,6 +163,28 @@ export default {
                 window.location="/#/lUsers"
             })
             .catch(console.log)
+        },
+        updateObservation(id, description, answer, standardId, serviceId, observation){
+            let operation="UpdateCriteria"
+            let tna=4
+            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"            
+
+
+            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+            "&tna="+tna+
+            "&key="+key+
+            "&descriptionCriteria="+encodeURIComponent(description)+
+            "&answerCriteria="+encodeURIComponent(answer)+
+            "&observationCriteria="+encodeURIComponent(observation)+
+            "&standardIdCriteria="+encodeURIComponent(standardId)+
+            "&serviceIdCriteria="+encodeURIComponent(serviceId)+
+            "&idCriteria="+id
+            console.log(url)
+            fetch(url)
+            .then(response=>response.json())
+            .then(response=>{console.log(response);
+            })
+            
         }
 
     }

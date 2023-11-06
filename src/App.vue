@@ -2,7 +2,8 @@
   <div id="app">
     <div class="sidebar" :class="{ 'show': showMenu }">
       <nav class="nav-container">
-        <router-link class="nav-link" to="/"><i class="fas fa-code"></i>Login</router-link>
+        <router-link class="nav-link" to="/"><i class="fas fa-house"></i>Home</router-link>
+        <router-link class="nav-link" to="/login"><i class="fas fa-code"></i>Login</router-link>
         <router-link class="nav-link" to="/cEntity"><i class="fas fa-stethoscope"></i>cEntity</router-link>
         <router-link class="nav-link" to="/eList"><i class="fas fa-list"></i>EntityList</router-link>
         <router-link class="nav-link" to="/cUser"><i class="fas fa-user-plus"></i>cUser</router-link>

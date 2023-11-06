@@ -30,7 +30,7 @@
                         <tr v-for="entidad in entidades" :key="entidad.id">
                             <td scope="row">{{entidad.id}}</td>
                             <td>{{entidad.name}}</td>
-                            <td>{{ entidad.phone }}</td>
+                            <td>{{entidad.phone }}</td>
                             <td>{{entidad.adress}}</td>
                             <td></td>
                             <td>
