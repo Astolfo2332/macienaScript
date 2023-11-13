@@ -107,6 +107,7 @@ export default{
 			localStorage.setItem("name",response.userVO.name)
 			localStorage.setItem("userType",response.userVO.userType)
 			localStorage.setItem("id",response.userVO.idb)
+      localStorage.setItem("entityID",response.userVO.entityID)
 			localStorage.setItem("auth","true")
             window.location="/"
             window.location.reload()

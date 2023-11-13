@@ -171,7 +171,7 @@ router.beforeEach((to,from,next)=>{
     }
     else{
         if (rtUser>=tUser){
-       next() 
+            next() 
             console.log("req",rtUser)
             console.log("type",tUser)
         }

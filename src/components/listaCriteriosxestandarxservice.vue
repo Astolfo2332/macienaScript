@@ -31,26 +31,26 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Estandar</th>
                             <th>Descripción</th>
                             <th>Respuesta del criterio</th>
                             <th>Observación del criterio</th>
+                            <th v-if="permissionss<=2">Observación de Auditor</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="criterio in criterios" :key="criterio.id">
-                            <td scope="row">{{criterio[0].id}}</td>
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
                             <td>
-                                <select class="form-select" id="form3Example4" v-model="criterio[0].answer" @change="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)">
+                                <select class="form-select" id="form3Example4" v-model="criterio[0].answer" @change="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)">
                                     <option value="C" :selected="criterio[0].answer === 'C'">Cumple</option>
                                     <option value="NC" :selected="criterio[0].answer === 'NC'">No Cumple</option>
                                     <option value="NA" :selected="criterio[0].answer === 'NA'">No Aplica</option>
                                 </select>
                             </td>
-                            <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation)"></td>
+                            <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
+                            <td v-if="permissionss<=2"><input class="form-control" placeholder="Observacion Auditor" type="text" v-model="criterio[0].observationAuditor" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,10 +74,12 @@ export default {
             estandares:[],
             servicios:[],
             servicelist:99999,
+            permissionss: 50,
         }
     },
     created:function(){
         this.queryServiceByEntity()
+        this.condition()
     },
     watch: {
         servicelist: function (nuebo) {
@@ -169,7 +171,7 @@ export default {
             })
             .catch(console.log)
         },
-        updateObservation(id, description, answer, standardId, serviceId, observation){
+        updateObservation(id, description, answer, standardId, serviceId, observation, observationAuditor){
             let operation="UpdateCriteria"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"            
@@ -181,6 +183,7 @@ export default {
             "&descriptionCriteria="+encodeURIComponent(description)+
             "&answerCriteria="+encodeURIComponent(answer)+
             "&observationCriteria="+encodeURIComponent(observation)+
+            "&observationCriteriaAuditor="+encodeURIComponent(observationAuditor)+
             "&standardIdCriteria="+encodeURIComponent(standardId)+
             "&serviceIdCriteria="+encodeURIComponent(serviceId)+
             "&idCriteria="+id
@@ -190,6 +193,10 @@ export default {
             .then(response=>{console.log(response);
             })
             
+        },
+        condition() {
+            const localStorageValue = localStorage.getItem('userType');
+            this.permissionss = localStorageValue;
         }
 
     }

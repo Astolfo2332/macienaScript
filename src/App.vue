@@ -3,23 +3,24 @@
     <div class="sidebar" :class="{ 'show': showMenu }">
       <nav class="nav-container">
         <router-link v-show="isAuth" class="nav-link" to="/"><i class="fas fa-home"></i>Home</router-link>
-        <router-link v-show="isAuth" class="nav-link" to="/login"><i class="fas fa-code"></i>Login</router-link>
-        <router-link v-show="vUser2" class="nav-link" to="/cEntity"><i class="fas fa-stethoscope"></i>cEntity</router-link>
-        <router-link v-show="vUser2" class="nav-link" to="/eList"><i class="fas fa-list"></i>EntityList</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/cUser"><i class="fas fa-user-plus"></i>cUser</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/lUsers"><i class="fas fa-users"></i>lUser</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/usersxentity"><i class="fas fa-user-friends"></i>usersxentity</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/servicesList"><i class="fas fa-list-alt"></i>lService</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/servicesxEntity"><i class="fas fa-address-book"></i>ServicexEntity</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/cStandard"><i class="fas fa-pager"></i>cStandart</router-link> 
-        <router-link  v-show="vUser3" class="nav-link" to="/lStandard"><i class="fas fa-list-ol"></i>lStandart</router-link>
-        <router-link  v-show="!isAuth" class="nav-link" to="/StandardxService"><i class="fas fa-handshake"></i>StandardxService</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/cCriteria"><i class="fas fa-clipboard"></i>cCriteria</router-link>
-        <router-link  v-show="vUser3" class="nav-link" to="/cService"><i class="fas fa-cog"></i>cService</router-link>
-        <router-link  v-show="!isAuth" class="nav-link" to="/lCxs"><i class="fas fa-light fa-address-book"></i>ListCritxserv</router-link>
-        <router-link  v-show="!isAuth" class="nav-link" to="/lCxStan"><i class="fas fa-tasks"></i>ListCritxStan</router-link>
-        <router-link  v-show="!isAuth" class="nav-link" to="/lCxStanxServ"><i class="fas fa-tasks"></i>ListCritxStanxServ</router-link>
+        <router-link v-show="isAuth" class="nav-link" to="/login"><i class="fas fa-code"></i>Autenticación</router-link>
+        <router-link v-show="vUser2" class="nav-link" to="/cEntity"><i class="fas fa-stethoscope"></i>Crear Entidad</router-link>
+        <router-link v-show="vUser2" class="nav-link" to="/eList"><i class="fas fa-list"></i>Ver Entidades</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cUser"><i class="fas fa-user-plus"></i>Crear usuarios</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/lUsers"><i class="fas fa-users"></i>Listar Usuarios</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/usersxentity"><i class="fas fa-user-friends"></i>Usuarios por Entidad</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/servicesList"><i class="fas fa-list-alt"></i>Listar Servicios</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/servicesxEntity"><i class="fas fa-address-book"></i>Servicios por Entidad</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cStandard"><i class="fas fa-pager"></i>Crear Estandares</router-link> 
+        <router-link  v-show="vUser3" class="nav-link" to="/lStandard"><i class="fas fa-list-ol"></i>Listar Estandares</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/StandardxService"><i class="fas fa-handshake"></i>Estandares por Servicio</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cCriteria"><i class="fas fa-clipboard"></i>Crear Criterios</router-link>
+        <router-link  v-show="vUser3" class="nav-link" to="/cService"><i class="fas fa-cog"></i>Crear Servicios</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/lCxs"><i class="fas fa-light fa-address-book"></i>Criterios por Servicio</router-link>
+        <router-link  v-show="!isAuth" class="nav-link" to="/lCxStan"><i class="fas fa-tasks"></i>Criterios por Estandar</router-link>
+        <router-link  :to="{name:'listCritxStandardxStan', params:{id:eid}}" v-if="!isAuth" class="nav-link"><i class="fas fa-tasks"></i>Revisión de criterios</router-link>
       </nav>
+
     </div>
     <button @click="toggleMenu" class="menu-toggle" :class="{ 'show': showMenu }"><i class="fas fa-bars"></i></button> 
     <div class="center-box">
@@ -41,7 +42,7 @@ export default {
   data() {
     return {
       showMenu: false,
-    
+      eid:localStorage.getItem("entityID")
     };
   },
   methods: {
@@ -52,6 +53,7 @@ export default {
         localStorage.removeItem("name");
         localStorage.removeItem("userType");
         localStorage.removeItem("id");
+        localStorage.removeItem("entityID");
         localStorage.setItem("auth",false)
         alert("Sesión cerrada exitosamente")
         window.location="/#/"
@@ -100,9 +102,7 @@ export default {
             }
         },
 
-    }
-    
-        
+    }    
 };
 </script>
 
