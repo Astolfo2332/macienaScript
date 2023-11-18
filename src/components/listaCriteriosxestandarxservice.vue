@@ -7,6 +7,7 @@
   <!-- Background image -->
 
   <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        width=90%;
         margin-top: -100px;
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
@@ -35,7 +36,7 @@
                             <th>Descripción</th>
                             <th>Respuesta del criterio</th>
                             <th>Observación del criterio</th>
-                            <th v-if="permissionss<=2">Observación de Auditor</th>
+                            <th>Observación de Auditor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,7 @@
                             </td>
                             <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                             <td v-if="permissionss<=2"><input class="form-control" placeholder="Observacion Auditor" type="text" v-model="criterio[0].observationAuditor" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
+                            <td v-else>{{criterio[0].observationAuditor}}</td>
                         </tr>
                     </tbody>
                 </table>
