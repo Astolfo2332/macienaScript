@@ -6,8 +6,9 @@
         "></div>
   <!-- Background image -->
 
-  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
-        width=90%;
+  <div style="
+        width: 99%;
+        margin: auto;
         margin-top: -100px;
         background: hsla(0, 0%, 100%, 0.8);
         backdrop-filter: blur(30px);
@@ -39,8 +40,8 @@
                             <th>Observación de Auditor</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr v-for="criterio in criterios" :key="criterio.id">
+                    <tbody v-for="num in standarnum" :key="num">
+                        <tr v-for="criterio in criterios[num]" :key="criterio.id">
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
                             <td>
@@ -52,7 +53,7 @@
                             </td>
                             <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                             <td v-if="permissionss<=2"><input class="form-control" placeholder="Observacion Auditor" type="text" v-model="criterio[0].observationAuditor" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
-                            <td v-else>{{criterio[0].observationAuditor}}</td>
+                            <td>{{criterio[0].observationAuditor}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,6 +78,9 @@ export default {
             servicios:[],
             servicelist:99999,
             permissionss: 50,
+            criteriostemp:[],
+            actual: 0,
+            standarnum:[]
         }
     },
     created:function(){
@@ -118,17 +122,20 @@ export default {
                 fetch(url)
                 .then(respuesta=>respuesta.json())
                 .then((datosRespuesta)=>{
-                    console.log(datosRespuesta.arrayCriteria)
                     if(datosRespuesta.valid==true){
                         for (let j=0;j<datosRespuesta.arrayCriteria.length;j++){
                             datosRespuesta.arrayCriteria.sort(function(a,b){
                                 return a.id - b.id;
                             })
-                            this.criterios.push([datosRespuesta.arrayCriteria[j], this.estandares[i].id, this.estandares[i].name]);
+                            this.criteriostemp.push([datosRespuesta.arrayCriteria[j], this.estandares[i].id, this.estandares[i].name]);
                         }
-                        this.criterios.sort(function(a, b) {
-                        return a[1] - b[1];
-                        });
+                        this.criteriostemp.sort(function(a,b) {
+                            return a[1] - b[1];
+                        })
+                        this.criterios.push(this.criteriostemp)
+                        this.criteriostemp = []
+                        this.standarnum.push(this.actual)
+                        this.actual = this.actual+1
                     }
                 })
                 .catch(console.log)
@@ -201,6 +208,12 @@ export default {
             this.permissionss = localStorageValue;
         }
 
-    }
+    },
+    mounted() {
+    // Iterate through criterios and update VarName for each iteration
+    this.criterios.forEach((criterio) => {
+      this.test = criterio[2];
+    });
+    },
 }
 </script>
