@@ -12,6 +12,28 @@
           <div class="card-body p-5 shadow-5 text-center">
             <h2 class="fw-bold mb-5">Crear criterio</h2>
             <form>
+            <div class="form-outline mb-4" v-if="permissionss<3">
+                <select class='form-select'  id="form3Example4" v-model="userEntityId" required>
+                    <option v-for="entidad in entidades" :key="entidad.id" :value="entidad.id"> {{ entidad.name }} </option>
+                </select>
+                <label class="form-label" for="form3Example4">ID de entidad</label>
+            </div>
+            <button v-if="permissionss<3" type="submit" class="btn btn-primary btn-block mb-4" @click="queryServiceByEntity">
+                Seleccionar Entidad
+              </button>
+            </form>
+            <form>
+            <div class="form-outline mb-4" v-if="permissionss<=3">
+                <select class='form-select'  id="form3Example4" v-model="idService" required>
+                    <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.id"> {{ servicio.name }} </option>
+                </select>
+                <label class="form-label" for="form3Example4">Servicio</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4" @click="queryStandardByService(idService)">
+                Seleccionar servicio
+              </button>
+            </form>
+            <form>
             
               <div class="form-outline mb-4">
                 <input type="text" id="form3Example4" class="form-control" v-model="description" required/>
@@ -84,15 +106,28 @@
 export default{
   data(){
         return {
-           estandares:[]
+          entidades:[],
+           estandares:[],
+           servicios:[],
+           userEntityId:0,
+           permissionss:9999
         }
     },
     created:function(){
-        this.queryStandardByTenancy()
+        this.queryEntityByTenancy()
+        this.condition()
+        this.queryServiceByEntity()
     },
 methods:{
-  queryStandardByTenancy(){
-            let operation="queryStandardByTenancy"
+  condition() {
+            const localStorageValue = localStorage.getItem('userType');
+            this.permissionss = localStorageValue;
+            const localtorageEntity=localStorage.getItem('entityID');
+            console.log(localtorageEntity)
+            this.userEntityId = localtorageEntity;
+        },
+        queryEntityByTenancy(){
+            let operation="queryEntityByTenancy"
             let tna=4
             let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
             const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
@@ -102,9 +137,49 @@ methods:{
             .then(respuesta=>respuesta.json())
             .then((datosRespuesta)=>{
                 console.log(datosRespuesta)
+                this.entidades=[]
+                if(datosRespuesta.valid==true){
+                    this.entidades=datosRespuesta.arrayEntity;
+                }
+
+            })
+            .catch(console.log)
+        },
+        queryStandardByService(idService){
+            let operation="queryStandardByService"
+            let tna=4
+            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+            "&tna="+tna+
+            "&key="+key+
+            "&serviceIdStandard="+idService
+            fetch(url)
+            .then(respuesta=>respuesta.json())
+            .then((datosRespuesta)=>{
+                console.log(datosRespuesta)
                 this.estandares=[]
                 if(datosRespuesta.valid==true){
                     this.estandares=datosRespuesta.arrayStandard;
+                }
+
+            })
+            .catch(console.log)
+        },
+        queryServiceByEntity(){
+            let operation="queryServiceByEntity"
+            let tna=4
+            let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
+            const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
+            "&tna="+tna+
+            "&key="+key+
+            "&entityIdService="+this.userEntityId
+            fetch(url)
+            .then(respuesta=>respuesta.json())
+            .then((datosRespuesta)=>{
+                console.log(datosRespuesta)
+                this.servicios=[]
+                if(datosRespuesta.valid==true){
+                    this.servicios=datosRespuesta.arrayService;
                 }
 
             })

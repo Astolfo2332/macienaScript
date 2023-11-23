@@ -23,8 +23,8 @@
                     <label class="form-label" for="form3Example4">Descripción servicio</label>
                   </div>
     
-                  <div class="form-outline mb-4">
-                    <select class='form-select'  id="form3Example4" v-model="entityIdService" required>
+                  <div class="form-outline mb-4" v-if="permissionss<=2">
+                    <select class='form-select'  id="form3Example4" v-model="userEntityId" required>
                       <option v-for="entidad in entidades" :key="entidad.id" :value="entidad.id"> {{ entidad.name }} </option>
                     </select>
                     <label class="form-label" for="form3Example4">Entidad</label>
@@ -79,13 +79,23 @@
     export default{
       data(){
             return {
-               entidades:[]
+               entidades:[],
+               userEntityId:0,
+               permissionss:99999
             }
         },
         created:function(){
           this.queryEntityByTenancy()
+          this.condition()
         },
     methods:{
+      condition() {
+            const localStorageValue = localStorage.getItem('userType');
+            this.permissionss = localStorageValue;
+            const localtorageEntity=localStorage.getItem('entityID');
+            console.log(localtorageEntity)
+            this.userEntityId = localtorageEntity;
+        },
       queryEntityByTenancy(){
                 let operation="queryEntityByTenancy"
                 let tna=4
@@ -112,7 +122,7 @@
           let key="5c887ca4-bb45-4a92-ac2b-93602162dff9"
           let name=encodeURIComponent(this.name)
           let description=encodeURIComponent(this.description)
-          let entityIdService=encodeURIComponent(this.entityIdService)
+          let entityIdService=encodeURIComponent(this.userEntityId)
     
           const url="https://redb.qsystems.co/QS3100/QServlet?operation="+operation+
           "&tna="+tna+

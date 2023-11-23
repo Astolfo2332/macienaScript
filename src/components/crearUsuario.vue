@@ -69,12 +69,14 @@
                 <label class="form-label" for="form3Example4">Tipo de usuario</label>
               </div>
 
-              <div class="form-outline mb-4" v-if="permissions <= 2">
+              <div class="form-outline mb-4" v-if="permissions<=2">
                 <select class='form-select'  id="form3Example4" v-model="userEntityId" required>
                   <option v-for="entidad in entidades" :key="entidad.id" :value="entidad.id"> {{ entidad.name }} </option>
                 </select>
                 <label class="form-label" for="form3Example4">ID de entidad</label>
               </div>
+
+              <div v-else></div>
               
 
               <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveUser">
@@ -141,7 +143,9 @@ export default{
 methods:{
   condition() {
             const localStorageValue = localStorage.getItem('userType');
-            this.permissionss = localStorageValue;
+            this.permissions = localStorageValue;
+            console.log(this.permissions<=2)
+
             const localtorageEntity=localStorage.getItem('entityID');
             console.log(localtorageEntity)
             this.userEntityId = localtorageEntity;
