@@ -62,13 +62,16 @@
                 <label class="form-label" for="form3Example4">Tipo de usuario</label>
               </div>
 
-              <div class="form-outline mb-4">
+              <div class="form-outline mb-4" v-if="permissions < 3">
                 <select class='form-select'  id="form3Example4" v-model="userEntityId" required>
                   <option v-for="entidad in entidades" :key="entidad.id" :value="entidad.id"> {{ entidad.name }} </option>
                 </select>
                 <label class="form-label" for="form3Example4">ID de entidad</label>
               </div>
-
+              <div class="form-outline mb-4" v-else>
+                <input type="text" id="itext" v-model="userEntityId" readonly><br>
+                <label class="form-label" for="itext">ID de Entidad</label>
+            </div>
 
               <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveUser">
                 Crear
@@ -119,13 +122,21 @@ export default{
   data(){
         return {
             entidades:[],
+            permissions: 0,
+            userEntityId : 0,
             posiciones:[{id:1,name:"Super admin"},{id:2,name:"Admin"},{id:3,name:"Admin entidad"},{id:4,name:"Usuario"},]
         }
     },
     created:function(){
         this.queryEntityByTenancy()
+        this.condition()
     },
 methods:{
+  condition() {
+            const localStorageValue = localStorage.getItem('userType');
+            this.permissionss = localStorageValue;
+            this.userEntityId = localStorage.getItem("entityId")
+        },
   queryEntityByTenancy(){
             let operation="queryEntityByTenancy"
             let tna=4

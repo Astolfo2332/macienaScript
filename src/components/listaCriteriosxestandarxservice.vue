@@ -53,7 +53,7 @@
                             </td>
                             <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                             <td v-if="permissionss<=2"><input class="form-control" placeholder="Observacion Auditor" type="text" v-model="criterio[0].observationAuditor" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
-                            <td>{{criterio[0].observationAuditor}}</td>
+                            <td v-else>{{criterio[0].observationAuditor}}</td>
                         </tr>
                     </tbody>
                 </table>
