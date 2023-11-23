@@ -55,9 +55,16 @@
                 <label class="form-label" for="form3Example4">Posición de usuario</label>
               </div>
 
-           <div class="form-outline mb-4" v-if="permissions <= 2">
+           <div class="form-outline mb-4" v-if="permissions < 2">
                 <select class='form-select'  id="form3Example4" v-model="userType" required>
                   <option v-for="posicion in posiciones" :key="posicion.id" :value="posicion.id"> {{ posicion.name }} </option>
+                </select>
+                <label class="form-label" for="form3Example4">Tipo de usuario</label>
+              </div>
+
+              <div class="form-outline mb-4" v-if="permissions = 2">
+                <select class='form-select'  id="form3Example4" v-model="userType" required>
+                  <option v-for="posicion in posiciones2" :key="posicion.id" :value="posicion.id"> {{ posicion.name }} </option>
                 </select>
                 <label class="form-label" for="form3Example4">Tipo de usuario</label>
               </div>
@@ -68,6 +75,7 @@
                 </select>
                 <label class="form-label" for="form3Example4">ID de entidad</label>
               </div>
+              
 
               <button type="submit" class="btn btn-primary btn-block mb-4" @click="SaveUser">
                 Crear
@@ -122,7 +130,8 @@ export default{
             entidades:[],
             permissions: 9999,
             userEntityId : 0,
-            posiciones:[{id:1,name:"Super admin"},{id:2,name:"Admin"},{id:3,name:"Admin entidad"},{id:4,name:"Usuario"},]
+            posiciones:[{id:1,name:"Super admin"},{id:2,name:"Admin"},{id:3,name:"Admin entidad"},{id:4,name:"Usuario"},],
+            posiciones2:[{id:3,name:"Admin entidad"},{id:4,name:"Usuario"},]
         }
     },
     created:function(){
