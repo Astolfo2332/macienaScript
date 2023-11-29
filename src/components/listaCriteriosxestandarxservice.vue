@@ -41,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody v-for="num in standarnum" :key="num">
-                        <tr v-for="criterio in criterios[num]" :key="criterio.id">
+                        <tr v-for="criterio in criterios[num]" :key="criterio[0].id">
                             <td>{{criterio[2]}}</td>
                             <td>{{criterio[0].description}}</td>
                             <td>
@@ -54,6 +54,11 @@
                             <td><input class="form-control" placeholder="Observacion" type="text" v-model="criterio[0].observation" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                             <td v-if="permissionss<=2"><input class="form-control" placeholder="Observacion Auditor" type="text" v-model="criterio[0].observationAuditor" @blur="updateObservation(criterio[0].id,criterio[0].description,criterio[0].answer,criterio[0].standardID,criterio[0].serviceID, criterio[0].observation,criterio[0].observationAuditor)"></td>
                             <td v-else>{{criterio[0].observationAuditor}}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="">
+                                    <router-link :to="{name:'crearArchivo', params:{id:criterio[0].id}}" class="btn btn-info">Archivos</router-link>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

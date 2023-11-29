@@ -21,12 +21,19 @@ import lCritxStan from "../components/listaCriteriosxestandar.vue"
 import lCritxStanxServ from "../components/listaCriteriosxestandarxservice.vue"
 import eCriteria from "../components/editarCriterio.vue"
 import homeini from "../components/homeIni.vue"
+import crearArchivo from "../components/crearArchivo.vue"
 const routes = [
   {
     path: '/',
     name: 'home',
     component: homeini
     , meta:{userType:4,requireAuth:false}
+  },
+  {
+    path: '/crearArchivo:id',
+    name: 'crearArchivo',
+    component: crearArchivo
+    , meta:{userType:3,requireAuth:true}
   },
 {
     path: '/login',
