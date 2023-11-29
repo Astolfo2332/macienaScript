@@ -55,7 +55,7 @@
                 <label class="form-label" for="form3Example4">Posición de usuario</label>
               </div>
 
-           <div class="form-outline mb-4" v-if="permissions < 2">
+           <div class="form-outline mb-4" v-if="permissions <= 2">
                 <select class='form-select'  id="form3Example4" v-model="userType" required>
                   <option v-for="posicion in posiciones" :key="posicion.id" :value="posicion.id"> {{ posicion.name }} </option>
                 </select>
@@ -137,8 +137,8 @@ export default{
         }
     },
     created:function(){
+      this.condition()
         this.queryEntityByTenancy()
-        this.condition()
     },
 methods:{
   condition() {

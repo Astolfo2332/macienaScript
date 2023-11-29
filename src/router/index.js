@@ -33,7 +33,7 @@ const routes = [
     path: '/crearArchivo:id',
     name: 'crearArchivo',
     component: crearArchivo
-    , meta:{userType:3,requireAuth:true}
+    , meta:{userType:4,requireAuth:true}
   },
 {
     path: '/login',
