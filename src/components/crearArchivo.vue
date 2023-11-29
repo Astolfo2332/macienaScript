@@ -120,7 +120,7 @@ methods:{
 
       fetch(url)
       .then(response=>response.json())
-      .then(response=>{console.log(response);
+      .then(response=>{console.log(response.valid);
       if (response.valid==true){
         alert("Archivo creado exitosamente con el id: "+response.FileVO.id)
       }
